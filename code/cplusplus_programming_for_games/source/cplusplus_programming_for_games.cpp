@@ -107,7 +107,7 @@ int main()
 			default:
 				break;
 			}
-
+			
 			if (userInput.type == SDL_KEYDOWN) // if statments for f key
 			{
 				if (userInput.key.keysym.scancode == SDL_SCANCODE_F)
