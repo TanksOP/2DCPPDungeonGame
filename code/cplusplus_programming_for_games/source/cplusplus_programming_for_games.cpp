@@ -36,7 +36,18 @@ using namespace std;
 const int screenWidth = 800;
 const int screenHeight = 600;
 
+vector<int> colour = { 0,0,0 };
 
+
+vector<int> changeColour(vector<int> colour)
+{
+	colour[0]++;
+	
+	colour[2]++;
+
+	return colour;
+
+}
 
 int main()
 {
@@ -63,16 +74,21 @@ int main()
 		return 1;
 	}
 
-	vector<int> colour = {0,255,0};
+	/*for (int i = 0; i < 100; i++)
+	{
+		colour = changeColour(colour);
+		SDL_UpdateWindowSurface(window);
+		SDL_Delay(1000);
+	}*/
 
 	screenSurface = SDL_GetWindowSurface(window);
 
-	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, colour[0], colour[1], colour[2]));
-	SDL_UpdateWindowSurface(window);
+	/*SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, colour[0], colour[1], colour[2]));
+	SDL_UpdateWindowSurface(window);*/
 
-	SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
-	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
-	SDL_UpdateWindowSurface(window);
+	//SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
+	/*SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
+	SDL_UpdateWindowSurface(window);*/
 
 	SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
 	SDL_DestroyWindow(window); // closes the window
@@ -80,4 +96,3 @@ int main()
 	return 0;
 }
 
-//void 
