@@ -42,7 +42,7 @@ vector<int> colour = { 0,0,0 };
 vector<int> changeColour(vector<int> colour)
 {
 	colour[0]++;
-	
+	colour[1]++;	
 	colour[2]++;
 
 	return colour;
@@ -81,10 +81,34 @@ int main()
 		SDL_Delay(1000);
 	}*/
 
+	
+
 	screenSurface = SDL_GetWindowSurface(window);
 
-	/*SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, colour[0], colour[1], colour[2]));
-	SDL_UpdateWindowSurface(window);*/
+	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, colour[0], colour[1], colour[2]));
+	SDL_UpdateWindowSurface(window);
+
+	bool quiting = false;
+	while (!quiting)
+	{
+		SDL_Event userInput;
+		while (SDL_PollEvent(&userInput))
+		{
+			if (userInput.type == SDL_QUIT)
+			{
+				quiting = true;
+			}
+
+			if (userInput.type == SDL_KEYDOWN)
+			{
+				if (userInput.key.keysym.scancode == SDL_SCANCODE_F)
+				{
+					quiting = true;
+				}
+				
+			}
+		}
+	}
 
 	//SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
 	/*SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
