@@ -6,6 +6,8 @@
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 
+using namespace std;
+
 //int main()
 //{
 //    std::cout << "Game Over!" << std::endl;
@@ -38,6 +40,9 @@ const int screenHeight = 600;
 
 int main()
 {
+
+	
+
 	SDL_Window* window = nullptr;
 	SDL_Surface* screenSurface = nullptr;
 
@@ -58,18 +63,21 @@ int main()
 		return 1;
 	}
 
-
+	vector<int> colour = {0,255,0};
 
 	screenSurface = SDL_GetWindowSurface(window);
 
-	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 144, 238, 144));
+	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, colour[0], colour[1], colour[2]));
+	SDL_UpdateWindowSurface(window);
 
 	SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
 	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
-
 	SDL_UpdateWindowSurface(window);
+
 	SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
 	SDL_DestroyWindow(window); // closes the window
 	SDL_Quit();
 	return 0;
 }
+
+//void 
