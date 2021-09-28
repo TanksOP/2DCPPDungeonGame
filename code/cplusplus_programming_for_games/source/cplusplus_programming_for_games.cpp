@@ -1,6 +1,8 @@
 // cplusplus_programming_for_games.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #include <iostream>
+#include <string>
+#include <vector> 
 #define SDL_MAIN_HANDLED
 #include <SDL.h>
 
@@ -32,6 +34,8 @@
 const int screenWidth = 800;
 const int screenHeight = 600;
 
+
+
 int main()
 {
 	SDL_Window* window = nullptr;
@@ -48,16 +52,24 @@ int main()
 		screenWidth, screenHeight,
 		SDL_WINDOW_SHOWN
 	);
-	if (window == NULL) {
+	if (window == NULL) { // this si called if the widow could not be created
 		std::cout << "could not initialise window!" << std::endl;
 		std::cout << SDL_GetError() << std::endl;
 		return 1;
 	}
+
+
+
 	screenSurface = SDL_GetWindowSurface(window);
+
 	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 144, 238, 144));
+
+	SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
+	SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 255, 0, 0));
+
 	SDL_UpdateWindowSurface(window);
-	SDL_Delay(5000);
-	SDL_DestroyWindow(window);
+	SDL_Delay(5000); // adds a delay so the window will stay open for a bit longer
+	SDL_DestroyWindow(window); // closes the window
 	SDL_Quit();
 	return 0;
 }
