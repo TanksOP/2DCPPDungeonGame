@@ -6,6 +6,21 @@ const int screenHeight = 600;
 SDL_Window* window = nullptr;
 SDL_Surface* screenSurface = nullptr;
 
+int main()
+{
+	GameLoop gameLoop = GameLoop();
+	if (gameLoop.init() < 0) return 1;
+
+	while (gameLoop.keepAlive())
+	{
+		gameLoop.update();
+		gameLoop.render();
+	}
+
+	gameLoop.clean();
+	return 0;
+}
+
 int GameLoop::init()
 {
 	
@@ -51,8 +66,22 @@ bool GameLoop::keepAlive()
 	SDL_Event userInput;
 	while (SDL_PollEvent(&userInput))
 	{
+		if (userInput.type == SDL_QUIT)
+		{
+			return false;
+		}
 
+		if (userInput.type == SDL_KEYDOWN)
+		{
+			switch (userInput.key.keysym.scancode) {
+			case SDL_SCANCODE_F:
+				break;
+			default:
+				break;
+			}
+		}
 	}
+	return true;
 
 }
 
