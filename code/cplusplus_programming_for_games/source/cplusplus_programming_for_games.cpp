@@ -99,14 +99,14 @@ int main()
 				quiting = true;
 			}
 
-			switch (userInput.key.keysym.scancode) // using a switch for 
+			/*switch (userInput.key.keysym.scancode) // using a switch for 
 			{
 			case SDL_SCANCODE_F:
 				quiting = true;
 				break;
 			default:
 				break;
-			}
+			}*/
 			
 			if (userInput.type == SDL_KEYDOWN) // if statments for f key
 			{
