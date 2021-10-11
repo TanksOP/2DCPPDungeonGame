@@ -67,7 +67,9 @@ void GameLoop::update()
 
 void GameLoop::render()
 {
-
+	SDL_RenderClear(renderer);
+	player->render();
+	SDL_RenderPresent(renderer);
 }
 
 void GameLoop::clean()
