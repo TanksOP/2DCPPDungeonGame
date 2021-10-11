@@ -24,6 +24,7 @@ int main()
 int GameLoop::init()
 {
 	
+	
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		std::cout << "could not initialize SDL2!" << std::endl;
@@ -42,6 +43,20 @@ int GameLoop::init()
 		return 1;
 	}
 	screenSurface = SDL_GetWindowSurface(window);
+
+	
+
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if (renderer == NULL)
+	{
+		std::cout << "could not initialise renderer!" << std::endl;
+		std::cout << SDL_GetError() << std::endl;
+		return -1;
+	}
+
+	player = new Player(renderer);
+	player->init();
+
 	return 0;
 }
 
@@ -57,6 +72,7 @@ void GameLoop::render()
 
 void GameLoop::clean()
 {
+	delete player;
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 }
