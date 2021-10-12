@@ -13,7 +13,23 @@ public:
 	void update();
 	void clean();
 
+	void moveRight(){
+		PlayerX++;
+	}
+	void moveLeft() {
+		PlayerX--;
+	}
+	void moveUp() {
+		PlayerY--;
+	}
+	void moveDown() {
+		PlayerY++;
+	}
+
 private:
+	int PlayerX = 0;
+	int PlayerY = 0;
+
 	SDL_Renderer* renderer = nullptr;
 	SDL_Texture* texture = nullptr;
 };

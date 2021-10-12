@@ -17,7 +17,12 @@ void Player::init()
 }
 void Player::render()
 {
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_Rect portion = SDL_Rect();
+	portion.x = PlayerX;
+	portion.y = PlayerY;
+	portion.w = 200;
+	portion.h = 50;
+	SDL_RenderCopy(renderer, texture, NULL, &portion);
 }
 void Player::update()
 {
