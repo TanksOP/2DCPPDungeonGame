@@ -19,12 +19,7 @@ void Player::init()
 }
 void Player::render()
 {
-	SDL_Rect portion = SDL_Rect(); // creates a rectangle to base carlos size off of
-	portion.x = PlayerX;
-	portion.y = PlayerY;
-	portion.w = 50;
-	portion.h = 50;
-
+	
 	float playerWidth = 0.1f * (float)windowWidth; // sets chibi carlo size relative to the screen size
 	portion.w = (int)playerWidth;
 	portion.h = (int)playerWidth;
@@ -38,3 +33,4 @@ void Player::clean()
 {
 
 }
+

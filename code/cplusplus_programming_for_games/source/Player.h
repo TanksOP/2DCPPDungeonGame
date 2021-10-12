@@ -14,26 +14,38 @@ public:
 	void clean();
 
 	void moveRight(){
-		PlayerX += PlayerSpeed;
+		portion.x += playerSpeed;
+		if (portion.x + portion.w >= windowWidth) {
+			portion.x = windowWidth - portion.w;
+		}
 	}
 	void moveLeft() {
-		PlayerX -= PlayerSpeed;
+		portion.x -= playerSpeed;
+		if (portion.x < 0) {
+			portion.x = 0;
+		}
 	}
 	void moveUp() {
-		PlayerY -= PlayerSpeed;
+		portion.y -= playerSpeed;
+		if (portion.y < 0) {
+			portion.y = 0;
+		}
 	}
 	void moveDown() {
-		PlayerY += PlayerSpeed;
+		portion.y += playerSpeed;
+		if (portion.y + portion.h >= windowHeight) {
+			portion.y = windowHeight - portion.h;
+		}
 	}
 
 private:
-	int PlayerX = 0;
-	int PlayerY = 0;
-	int PlayerSpeed = 5;
+	
+	int playerSpeed = 5;
 
 	int windowWidth = 0;
 	int windowHeight = 0;
 
+	SDL_Rect portion;
 	SDL_Renderer* renderer = nullptr;
 	SDL_Texture* texture = nullptr;
 };
