@@ -31,6 +31,9 @@ private:
 	int PlayerY = 0;
 	int PlayerSpeed = 5;
 
+	int windowWidth = 0;
+	int windowHeight = 0;
+
 	SDL_Renderer* renderer = nullptr;
 	SDL_Texture* texture = nullptr;
 };

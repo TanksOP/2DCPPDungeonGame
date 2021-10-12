@@ -54,7 +54,7 @@ int GameLoop::init()
 		return -1;
 	}
 
-	player = new Player(renderer);
+	player = new Player(renderer, screenWidth, screenHeight);
 	player->init();
 
 	return 0;
