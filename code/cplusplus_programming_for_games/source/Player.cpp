@@ -20,7 +20,7 @@ void Player::render()
 	SDL_Rect portion = SDL_Rect();
 	portion.x = PlayerX;
 	portion.y = PlayerY;
-	portion.w = 200;
+	portion.w = 50;
 	portion.h = 50;
 	SDL_RenderCopy(renderer, texture, NULL, &portion);
 }

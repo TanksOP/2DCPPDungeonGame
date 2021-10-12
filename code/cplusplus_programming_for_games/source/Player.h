@@ -14,21 +14,22 @@ public:
 	void clean();
 
 	void moveRight(){
-		PlayerX++;
+		PlayerX += PlayerSpeed;
 	}
 	void moveLeft() {
-		PlayerX--;
+		PlayerX -= PlayerSpeed;
 	}
 	void moveUp() {
-		PlayerY--;
+		PlayerY -= PlayerSpeed;
 	}
 	void moveDown() {
-		PlayerY++;
+		PlayerY += PlayerSpeed;
 	}
 
 private:
 	int PlayerX = 0;
 	int PlayerY = 0;
+	int PlayerSpeed = 5;
 
 	SDL_Renderer* renderer = nullptr;
 	SDL_Texture* texture = nullptr;
