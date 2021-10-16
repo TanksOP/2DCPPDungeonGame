@@ -3,7 +3,7 @@
 const int screenWidth = 800;
 const int screenHeight = 600;
 
-int isgdfyf = 0;
+int score = 0;
 
 SDL_Window* window = nullptr;
 SDL_Surface* screenSurface = nullptr;
@@ -67,7 +67,10 @@ int GameLoop::init()
 
 void GameLoop::update()
 {
-	isgdfyf++;
+	if (score < 20000) {
+		score++;
+	}
+	
 }
 
 void GameLoop::render()
@@ -77,7 +80,7 @@ void GameLoop::render()
 	fontRenderer->render("Hello", 600, 10, 100, 200 );
 	fontRenderer->render("Hi",600, 100, 100, 100);
 	
-	fontRenderer->render(std::to_string(isgdfyf), 600, 200, 100, 100);
+	fontRenderer->render(std::to_string(score), 600, 200, 100, 100);
 
 	player->render();
 
