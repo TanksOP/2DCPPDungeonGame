@@ -27,17 +27,17 @@ void FontRenderer::render(std::string text)
 	colour.b = 60;
 	colour.a = 255;
 
-	/*SDL_Rect corner = SDL_Rect();
-	corner.x = 100;
+	SDL_Rect corner = SDL_Rect();
+	corner.x = 600;
 	corner.y = 10;
-	corner.h = 10;
-	corner.w = 30;*/
+	corner.h = 70;
+	corner.w = 150;
 
 	// creates an image representing the text inputed 
 	SDL_Surface* textImage = TTF_RenderText_Solid(font, text.c_str(), colour);
 	//now to render it
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, textImage);
-	SDL_RenderCopy(renderer, texture, NULL, NULL);
+	SDL_RenderCopy(renderer, texture, NULL, &corner);
 
 	// now we have used the texture and image we can get rid of them
 	SDL_DestroyTexture(texture);
