@@ -19,7 +19,7 @@ void FontRenderer::init()
 	}
 }
 
-void FontRenderer::render(std::string text)
+void FontRenderer::render(std::string text, int x, int y, int height, int width)
 {
 	SDL_Color colour = SDL_Colour();
 	colour.r = 120;
@@ -28,10 +28,10 @@ void FontRenderer::render(std::string text)
 	colour.a = 255;
 
 	SDL_Rect corner = SDL_Rect();
-	corner.x = 600;
-	corner.y = 10;
-	corner.h = 70;
-	corner.w = 150;
+	corner.x = x;
+	corner.y = y;
+	corner.h = height;
+	corner.w = width;
 
 	// creates an image representing the text inputed 
 	SDL_Surface* textImage = TTF_RenderText_Solid(font, text.c_str(), colour);

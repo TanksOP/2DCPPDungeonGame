@@ -3,6 +3,8 @@
 const int screenWidth = 800;
 const int screenHeight = 600;
 
+int isgdfyf = 0;
+
 SDL_Window* window = nullptr;
 SDL_Surface* screenSurface = nullptr;
 
@@ -65,14 +67,20 @@ int GameLoop::init()
 
 void GameLoop::update()
 {
-
+	isgdfyf++;
 }
 
 void GameLoop::render()
 {
 	SDL_RenderClear(renderer);
+	
+	fontRenderer->render("Hello", 600, 10, 100, 200 );
+	fontRenderer->render("Hi",600, 100, 100, 100);
+	
+	fontRenderer->render(std::to_string(isgdfyf), 600, 200, 100, 100);
+
 	player->render();
-	fontRenderer->render("Hello");
+
 	SDL_RenderPresent(renderer);
 }
 
