@@ -2,17 +2,19 @@
 #  Awesome 2D Shooter Game
 
 <!-- A screenshot of your game would be nice here... -->
+Simple 2d, dungen explorer game
 
-This is a short and succint description of this project. 
-Jump'n'run vaporwave zombie-shooting game. Run to the exit before the water gets too high, defend yourself against brain-hungry zombies :running_man:
 
 Features:
-* Collect and switch between weapons :bomb:
-* Load game maps from the main menu :desert_island:
-* Collect as many coins as you can :moneybag:
+* the abbility to carry 2 weapns and switch between them
+* can pick up new weopns throughout the dungun and swap them with current ones
+* hidden roomz - walk through certain walls to find them
+* minimap to show what room you are in 
 
 ## Dependencies
 * SDL library
+* SDL image libary
+* SDL ttf libary
 
 ## Target platforms
 Support Windows x86/x64, GNU/Linux, OSX.
@@ -24,9 +26,7 @@ Instructions to build on Windows platforms:
 
 ## TODO
 
-* A* pathfinding for zombie;
-* Weapon sound effects;
-* low-health camera effect.
+
 
 ## Contact
 
