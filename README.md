@@ -7,9 +7,10 @@ Simple 2d, dungen explorer game
 
 Features:
 * the abbility to carry 2 weapns and switch between them
-* can pick up new weopns throughout the dungun and swap them with current ones
-* hidden roomz - walk through certain walls to find them
-* minimap to show what room you are in 
+* can pick up new weopns throughout the game and swap them with current ones
+* stackable powerups collect over time
+*  Maybe hidden rooms - walk through certain walls to find them
+* Maybe minimap to show what room you are in 
 
 ## Dependencies
 * SDL library
