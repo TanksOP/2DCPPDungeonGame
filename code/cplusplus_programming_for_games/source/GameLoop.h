@@ -7,6 +7,8 @@
 #include <SDL.h>
 #include "Player.h"
 #include "FontRenderer.h"
+#include "TiledMap.h"
+
 
 class GameLoop
 {
@@ -25,6 +27,7 @@ private:
 	SDL_Surface* screenSurface = nullptr;
 	SDL_Renderer* renderer = nullptr;
 	std::unique_ptr<FontRenderer> fontRenderer;
+	std::unique_ptr<TiledMap> tiledMap;
 
 	Player* player = nullptr;
 

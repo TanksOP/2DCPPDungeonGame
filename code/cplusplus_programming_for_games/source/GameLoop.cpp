@@ -62,6 +62,9 @@ int GameLoop::init()
 	fontRenderer = std::unique_ptr<FontRenderer>(new FontRenderer(renderer));
 	fontRenderer->init();
 
+	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "assets/tileMap.png"));
+	tiledMap->init();
+
 	return 0;
 }
 
@@ -75,13 +78,12 @@ void GameLoop::update()
 
 void GameLoop::render()
 {
-	SDL_RenderClear(renderer);
-	
+	SDL_RenderClear(renderer);	
 	fontRenderer->render("Hello", 600, 10, 100, 200 );
-	fontRenderer->render("Hi",600, 100, 100, 100);
-	
+	fontRenderer->render("Hi",600, 100, 100, 100);	
 	fontRenderer->render(std::to_string(score), 600, 200, 100, 100);
 
+	tiledMap->render();
 	player->render();
 
 	SDL_RenderPresent(renderer);
@@ -90,6 +92,7 @@ void GameLoop::render()
 void GameLoop::clean()
 {
 	fontRenderer->clean();
+	tiledMap->clean();
 	delete player;
 	SDL_DestroyWindow(window);
 	SDL_Quit();
