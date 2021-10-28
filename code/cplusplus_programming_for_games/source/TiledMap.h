@@ -15,8 +15,8 @@ public:
 
 private:
 	const int sourceTileSizePx = 70;
-	const int tileWidth = 180;
-	const int tileHeight = 160;
+	const int tileWidth = 180; // change this to screen width 
+	const int tileHeight = 180; // chaneg this to screen width
 
 	std::string filename;
 	SDL_Renderer* renderer;
@@ -27,8 +27,8 @@ const int mapWidth = 4;
 const int mapHeight = 4;
 const int map[mapHeight][mapWidth] = {
 	{1, 1, 1, 1},
-	{12, 12, 12, 12},
-	{10, 10, 10, 10},
+	{7, 7, 7, 7},
+	{13, 13, 13, 13},
 	{0, 0, 0, 0}
 };
 
