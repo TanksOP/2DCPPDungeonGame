@@ -7,28 +7,31 @@
 class TiledMap
 {
 public: 
-	TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename);
+	TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename, int _windowWidth, int _windowHeight);
 
 	int init();
 	void clean();
 	void render();
 
 private:
+	int windowWidth = 0;
+	int windowHeight = 0;
 	const int sourceTileSizePx = 70;
-	const int tileWidth = 180; // change this to screen width 
-	const int tileHeight = 180; // chaneg this to screen width
+
+	int tileWidth = 100; // change this to screen width 
+	int tileHeight = 100; // chaneg this to screen width
 
 	std::string filename;
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
 };
 
-const int mapWidth = 4;
+const int mapWidth = 5;
 const int mapHeight = 4;
 const int map[mapHeight][mapWidth] = {
-	{1, 1, 1, 1},
-	{7, 7, 7, 7},
-	{13, 13, 13, 13},
-	{0, 0, 0, 0}
+	{29, 22, 22, 22, 26},
+	{8, 30, 30, 30, 2},
+	{8, 30, 30, 30, 2},
+	{19, 36, 36, 36, 13 }
 };
 

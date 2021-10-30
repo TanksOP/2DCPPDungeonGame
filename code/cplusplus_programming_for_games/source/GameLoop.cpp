@@ -62,7 +62,7 @@ int GameLoop::init()
 	fontRenderer = std::unique_ptr<FontRenderer>(new FontRenderer(renderer));
 	fontRenderer->init();
 
-	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "assets/tileMap.png"));
+	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "assets/tileMap.png", screenWidth, screenHeight));
 	tiledMap->init();
 
 	return 0;

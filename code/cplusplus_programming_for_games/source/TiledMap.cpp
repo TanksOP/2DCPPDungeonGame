@@ -1,9 +1,11 @@
 #include "TiledMap.h"
 
-TiledMap::TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename)
+TiledMap::TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename, int _windowWidth, int _windowHeight)
 {
 	renderer = sdlRenderer;
 	filename = tiledMapFilename;
+	windowWidth = _windowWidth;
+	windowHeight = _windowHeight;
 }
 
 int TiledMap::init()
@@ -18,6 +20,9 @@ int TiledMap::init()
 
 void TiledMap::render()
 {
+	tileWidth = windowWidth / mapWidth;
+	tileHeight = windowHeight / mapHeight;
+
 	for (int i = 0; i < mapHeight; i++) {
 		for (int j = 0; j < mapWidth; j++) {
 
