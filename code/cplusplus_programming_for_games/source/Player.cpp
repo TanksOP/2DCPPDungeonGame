@@ -52,14 +52,14 @@ void Player::move(bool* keyDown)
 	}
 	if (keyDown[SDL_SCANCODE_UP] || keyDown[SDL_SCANCODE_W]) {
 		//std::cout << "up" << std::endl;
-		player.y -= playerSpeed * 0.5;
+		player.y -= playerSpeed;
 		if (player.y < 0) {
 			player.y = 0;
 		}
 	}
 	if (keyDown[SDL_SCANCODE_DOWN] || keyDown[SDL_SCANCODE_S]) {
 		//std::cout << "down" << std::endl;
-		player.y += playerSpeed * 0.5;
+		player.y += playerSpeed;
 		if (player.y + player.h >= windowHeight) {
 			player.y = windowHeight - player.h;
 		}

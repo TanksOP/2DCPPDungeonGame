@@ -42,7 +42,7 @@ public:
 
 private:
 	
-	float playerSpeed = 0.7;
+	float playerSpeed = 1;
 
 	int windowWidth = 0;
 	int windowHeight = 0;
