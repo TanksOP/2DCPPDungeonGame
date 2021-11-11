@@ -13,40 +13,54 @@ public:
 	void update();
 	void clean();
 
-	void moveRight(){
-		portion.x += playerSpeed;
-		if (portion.x + portion.w >= windowWidth) {
-			portion.x = windowWidth - portion.w;
+	void move(bool* keyDown);
+
+	/*void moveRight(){
+		player.x += playerSpeed;
+		if (player.x + player.w >= windowWidth) {
+			player.x = windowWidth - player.w;
 		}
-	}
-	void moveLeft() {
-		portion.x -= playerSpeed;
-		if (portion.x < 0) {
-			portion.x = 0;
+	}*/
+	/*void moveLeft() {
+		player.x -= playerSpeed;
+		if (player.x < 0) {
+			player.x = 0;
 		}
-	}
+	}*/
 	void moveUp() {
-		portion.y -= playerSpeed;
-		if (portion.y < 0) {
-			portion.y = 0;
+		player.y -= playerSpeed;
+		if (player.y < 0) {
+			player.y = 0;
 		}
 	}
 	void moveDown() {
-		portion.y += playerSpeed;
-		if (portion.y + portion.h >= windowHeight) {
-			portion.y = windowHeight - portion.h;
+		player.y += playerSpeed;
+		if (player.y + player.h >= windowHeight) {
+			player.y = windowHeight - player.h;
 		}
 	}
 
 private:
 	
-	int playerSpeed = 5;
+	float playerSpeed = 0.1f;
 
 	int windowWidth = 0;
 	int windowHeight = 0;
 
-	SDL_Rect portion;
+	SDL_Rect player;
 	SDL_Renderer* renderer = nullptr;
 	SDL_Texture* texture = nullptr;
+
+	// creatign a bool for moving
+	enum KeyStates {
+		LEFT = 0,
+		RIGHT,
+		UP,
+		DOWN,
+		KEYSTATES_COUNT
+	};
+
+	bool keyStates[KeyStates::KEYSTATES_COUNT];
+
 };
 

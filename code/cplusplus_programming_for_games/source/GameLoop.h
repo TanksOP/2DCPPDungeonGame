@@ -26,6 +26,10 @@ private:
 	SDL_Window* window = nullptr;
 	SDL_Surface* screenSurface = nullptr;
 	SDL_Renderer* renderer = nullptr;
+
+	// creates a why to turn on and off key presses
+	bool keyDown[512];
+
 	std::unique_ptr<FontRenderer> fontRenderer;
 	std::unique_ptr<TiledMap> tiledMap;
 

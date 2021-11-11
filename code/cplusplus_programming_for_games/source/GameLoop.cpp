@@ -56,6 +56,11 @@ int GameLoop::init()
 		return -1;
 	}
 
+	// sets all values in keydown to false so no keys are being pressed
+	for (int i = 0; i < 256; i++) {
+		keyDown[i] = false;
+	}
+
 	player = new Player(renderer, screenWidth, screenHeight);
 	player->init();
 
@@ -103,13 +108,13 @@ void GameLoop::handleInput(SDL_Scancode& keyScanCode)
 {
 	switch (keyScanCode)
 	{
-	case SDL_SCANCODE_D:
+	/*case SDL_SCANCODE_D:
 		player->moveRight();
-		break;
+		break;*/
 
-	case SDL_SCANCODE_A:
+	/*case SDL_SCANCODE_A:
 		player->moveLeft();
-		break;
+		break;*/
 
 	case SDL_SCANCODE_W:
 		player->moveUp();
@@ -136,9 +141,18 @@ bool GameLoop::keepAlive()
 
 		if (userInput.type == SDL_KEYDOWN)
 		{
+			keyDown[userInput.key.keysym.scancode] = true;
 			handleInput(userInput.key.keysym.scancode);
 		}
+		else if (userInput.type == SDL_KEYUP)
+		{
+			keyDown[userInput.key.keysym.scancode] = false;
+			
+		}
 	}
+
+	player->move(keyDown);
+
 	return true;
 
 }
