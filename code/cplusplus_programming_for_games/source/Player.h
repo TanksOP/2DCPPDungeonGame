@@ -27,7 +27,7 @@ public:
 			player.x = 0;
 		}
 	}*/
-	void moveUp() {
+	/*void moveUp() {
 		player.y -= playerSpeed;
 		if (player.y < 0) {
 			player.y = 0;
@@ -38,11 +38,11 @@ public:
 		if (player.y + player.h >= windowHeight) {
 			player.y = windowHeight - player.h;
 		}
-	}
+	}*/
 
 private:
 	
-	float playerSpeed = 0.1f;
+	float playerSpeed = 0.7;
 
 	int windowWidth = 0;
 	int windowHeight = 0;

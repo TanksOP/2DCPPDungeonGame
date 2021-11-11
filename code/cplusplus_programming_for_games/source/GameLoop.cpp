@@ -104,30 +104,30 @@ void GameLoop::clean()
 	SDL_Quit();
 }
 
-void GameLoop::handleInput(SDL_Scancode& keyScanCode)
-{
-	switch (keyScanCode)
-	{
-	/*case SDL_SCANCODE_D:
-		player->moveRight();
-		break;*/
-
-	/*case SDL_SCANCODE_A:
-		player->moveLeft();
-		break;*/
-
-	case SDL_SCANCODE_W:
-		player->moveUp();
-		break;
-
-	case SDL_SCANCODE_S:
-		player->moveDown();
-		break;
-
-	default:
-		break;
-	}
-}
+//void GameLoop::handleInput(SDL_Scancode& keyScanCode)
+//{
+//	switch (keyScanCode)
+//	{
+//	/*case SDL_SCANCODE_D:
+//		player->moveRight();
+//		break;*/
+//
+//	/*case SDL_SCANCODE_A:
+//		player->moveLeft();
+//		break;*/
+//
+//	case SDL_SCANCODE_W:
+//		player->moveUp();
+//		break;
+//
+//	case SDL_SCANCODE_S:
+//		player->moveDown();
+//		break;
+//
+//	default:
+//		break;
+//	}
+//}
 
 bool GameLoop::keepAlive()
 {
@@ -142,7 +142,7 @@ bool GameLoop::keepAlive()
 		if (userInput.type == SDL_KEYDOWN)
 		{
 			keyDown[userInput.key.keysym.scancode] = true;
-			handleInput(userInput.key.keysym.scancode);
+			//handleInput(userInput.key.keysym.scancode);
 		}
 		else if (userInput.type == SDL_KEYUP)
 		{

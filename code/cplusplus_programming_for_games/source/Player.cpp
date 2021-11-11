@@ -30,17 +30,38 @@ void Player::move(bool* keyDown)
 {
 	
 	if (keyDown[SDL_SCANCODE_LEFT] || keyDown[SDL_SCANCODE_A]) {
-		std::cout << "left" << std::endl;
-		player.x -= playerSpeed;
+		//std::cout << "left" << std::endl;
+		//std::cout << player.x << std::endl;
+		player.x -= playerSpeed * 0.5;
 		if (player.x < 0) {
 			player.x = 0;
 		}
 	}
 	if (keyDown[SDL_SCANCODE_RIGHT] || keyDown[SDL_SCANCODE_D]) {
-		std::cout << "right" << std::endl;
-		player.x += 1;
+		//std::cout << "right" << std::endl;
+
+
+		std::cout << playerSpeed << std::endl;
+		player.x += playerSpeed ;
+		std::cout << player.x << std::endl;
+
+
 		if (player.x + player.w >= windowWidth) {
 			player.x = windowWidth - player.w;
+		}
+	}
+	if (keyDown[SDL_SCANCODE_UP] || keyDown[SDL_SCANCODE_W]) {
+		//std::cout << "up" << std::endl;
+		player.y -= playerSpeed * 0.5;
+		if (player.y < 0) {
+			player.y = 0;
+		}
+	}
+	if (keyDown[SDL_SCANCODE_DOWN] || keyDown[SDL_SCANCODE_S]) {
+		//std::cout << "down" << std::endl;
+		player.y += playerSpeed * 0.5;
+		if (player.y + player.h >= windowHeight) {
+			player.y = windowHeight - player.h;
 		}
 	}
 }
