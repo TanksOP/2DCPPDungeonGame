@@ -13,12 +13,14 @@
 class GameLoop
 {
 public:
+
 	int init();
 
+	bool processInput();
+
 	void update();
-	void render();
-	bool keepAlive();
-	void handleInput(SDL_Scancode& keyScanCode);
+
+	void render();	
 
 	void clean();
 
@@ -34,6 +36,5 @@ private:
 	std::unique_ptr<TiledMap> tiledMap;
 
 	Player* player = nullptr;
-
 };
 

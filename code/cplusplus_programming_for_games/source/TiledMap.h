@@ -3,6 +3,7 @@
 #include<SDL_image.h>
 #include <string>
 #include <iostream>
+#include <vector>
 
 class TiledMap
 {
@@ -10,6 +11,7 @@ public:
 	TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename, int _windowWidth, int _windowHeight);
 
 	int init();
+	bool pathIsClear(float x, float y, float playerWidth);
 	void clean();
 	void render();
 
@@ -24,7 +26,13 @@ private:
 	std::string filename;
 	SDL_Renderer* renderer;
 	SDL_Texture* texture;
+
+	int locationX = 0;
+	int locationY = 0;
+	
 };
+
+
 
 const int mapWidth = 10;
 const int mapHeight = 10;

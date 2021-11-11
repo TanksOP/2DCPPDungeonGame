@@ -17,6 +17,17 @@ int TiledMap::init()
 
 }
 
+bool TiledMap::pathIsClear(float x, float y, float playerWidth)
+{
+	
+
+	int q = (x + playerWidth)/80;
+	int w = (y+playerWidth)/60;
+	std::cout << map[w][q] << std::endl;
+
+	return true;
+}
+
 
 void TiledMap::render()
 {
