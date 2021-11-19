@@ -17,13 +17,46 @@ int TiledMap::init()
 
 }
 
-bool TiledMap::pathIsClear(float x, float y, float playerWidth)
+bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeight)
 {
 	
+	/*
+	Below is a small grid showing where the differrnt collition points are on the player 
 
-	int q = (x + playerWidth)/80;
-	int w = (y+playerWidth)/60;
-	std::cout << map[w][q] << std::endl;
+	   |   X1  |   X2  |   X3
+	---|-------|-------|--------
+	Y1 | X1 Y1 | X2 Y1 | X3 Y1 
+	---|-------|-------|--------
+	Y2 | X1 Y2 | X2 Y2 | X3 Y3
+	---|-------|-------|--------
+	Y3 | X1 Y3 | X2 Y3 | X3 Y3
+	
+	*/
+	int X1 = (x) / 80;
+	int X2 = (x + 0.5 * playerWidth) / 80;
+	int X3 = (x + playerWidth)/80;
+	
+	int Y1 = (y ) / 60;
+	int Y2 = (y + 0.5 * playerHeight) / 60;
+	int Y3 = (y + playerHeight) / 60;
+	
+	// right side
+	if (map[Y1][X3] == 11 || map[Y2][X3] == 11 ||  map[Y3][X3] == 11) {
+		return false;
+	}
+	//left side
+	if (map[Y1][X1] == 11 || map[Y2][X1] == 11 || map[Y3][X1] == 11) {
+		return false;
+	}
+	//top side
+	if (map[Y1][X1] == 11 || map[Y1][X2] == 11 || map[Y1][X3] == 11) {
+		return false;
+	}
+	// bottom side
+	if (map[Y3][X1] == 11 || map[Y3][X2] == 11 || map[Y3][X3] == 11) {
+		return false;
+	}
+	
 
 	return true;
 }

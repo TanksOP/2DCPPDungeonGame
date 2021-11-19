@@ -29,6 +29,7 @@ private:
 	int windowWidth = 0;
 	int windowHeight = 0;
 	float playerWidth = 0;
+	float playerHeight = 0;
 
 	//SDL_Rect player;
 

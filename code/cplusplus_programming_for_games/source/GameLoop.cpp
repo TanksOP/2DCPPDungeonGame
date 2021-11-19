@@ -113,10 +113,11 @@ void GameLoop::render()
 	SDL_RenderClear(renderer);	
 
 	tiledMap->render();
+	
 
 	fontRenderer->render("Hello", 600, 10, 100, 200 );
 	fontRenderer->render("Hi",600, 100, 100, 100);	
-	fontRenderer->render(std::to_string(score), 600, 200, 100, 100);
+	fontRenderer->render(std::to_string(score), 600, 200, 100, 100); 
 
 	
 	player->render();

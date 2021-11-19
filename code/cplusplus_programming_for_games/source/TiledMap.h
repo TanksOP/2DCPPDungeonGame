@@ -11,7 +11,7 @@ public:
 	TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename, int _windowWidth, int _windowHeight);
 
 	int init();
-	bool pathIsClear(float x, float y, float playerWidth);
+	bool pathIsClear(float x, float y, float playerWidth, float playerHeight);
 	void clean();
 	void render();
 
@@ -34,17 +34,17 @@ private:
 
 
 
-const int mapWidth = 10;
-const int mapHeight = 10;
+ const int mapWidth = 10;
+ const int mapHeight = 10;
 const int map[mapHeight][mapWidth] = {
 	{29, 22, 22, 22, 22, 22, 22, 22, 22, 26},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
+	{8, 30, 11, 30, 11, 11, 11, 30, 30, 2},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
-	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
-	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
+	{8, 30, 30, 30, 30, 11, 30, 30, 30, 2},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
 	{19, 36, 36, 36, 36, 36, 36, 36, 36, 13 }
 };
