@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class TiledMap
 {
@@ -11,9 +12,14 @@ public:
 	TiledMap(SDL_Renderer* sdlRenderer, std::string tiledMapFilename, int _windowWidth, int _windowHeight);
 
 	int init();
+
 	bool pathIsClear(float x, float y, float playerWidth, float playerHeight);
-	void clean();
+
+	void update();
+
 	void render();
+
+	void clean();
 
 private:
 	int windowWidth = 0;
@@ -29,6 +35,8 @@ private:
 
 	int locationX = 0;
 	int locationY = 0;
+
+	std::string tileMap[10][10];
 	
 };
 

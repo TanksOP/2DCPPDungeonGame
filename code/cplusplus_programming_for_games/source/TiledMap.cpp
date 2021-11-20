@@ -61,6 +61,20 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 	return true;
 }
 
+void TiledMap::update()
+{
+	std::ifstream fileIn("textFile/text.txt");
+	if (fileIn.is_open())
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+			for (int j = 0; j < 10; ++j)
+				fileIn >> tileMap[j][i];
+		}
+	}
+	fileIn.close();
+}
+
 
 void TiledMap::render()
 {
