@@ -104,6 +104,7 @@ void GameLoop::update()
 		score++;
 	}
 
+	tiledMap->update();
 	player->update();
 	
 }

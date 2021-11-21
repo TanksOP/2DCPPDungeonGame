@@ -13,6 +13,18 @@ int TiledMap::init()
 	SDL_Surface* image = IMG_Load(filename.c_str());
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
+
+	std::ifstream fileIn("Assets/tileMaps/map1.txt");
+	if (fileIn.is_open())
+	{
+		for (int i = 0; i < 10; ++i)
+		{
+			for (int j = 0; j < 10; ++j)
+				fileIn >> tileMap[j][i];
+		}
+	}
+	fileIn.close();
+
 	return 0;
 
 }
@@ -32,6 +44,8 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 	Y3 | X1 Y3 | X2 Y3 | X3 Y3
 	
 	*/
+	
+	
 	int X1 = (x) / 80;
 	int X2 = (x + 0.5 * playerWidth) / 80;
 	int X3 = (x + playerWidth)/80;
@@ -39,9 +53,11 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 	int Y1 = (y ) / 60;
 	int Y2 = (y + 0.5 * playerHeight) / 60;
 	int Y3 = (y + playerHeight) / 60;
+
+	
 	
 	// right side
-	if (map[Y1][X3] == 11 || map[Y2][X3] == 11 ||  map[Y3][X3] == 11) {
+	if (map[X3][Y1] == 11 || map[Y2][X3] == 11 ||  map[Y3][X3] == 11) {
 		return false;
 	}
 	//left side
@@ -57,13 +73,29 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 		return false;
 	}
 	
+	//// right side
+	//if (std::stoi(tileMap[Y1][X3]) == 11 || std::stoi(tileMap[Y2][X3]) == 11 || std::stoi(tileMap[Y3][X3]) == 11) {
+	//	return false;
+	//}
+	////left side
+	//if (std::stoi(tileMap[Y1][X1]) == 11 || std::stoi(tileMap[Y2][X1]) == 11 || std::stoi(tileMap[Y3][X1]) == 11) {
+	//	return false;
+	//}
+	////top side
+	//if (std::stoi(tileMap[Y1][X1]) == 11 || std::stoi(tileMap[Y1][X2]) == 11 || std::stoi(tileMap[Y1][X3]) == 11) {
+	//	return false;
+	//}
+	//// bottom side
+	//if (std::stoi(tileMap[Y3][X1]) == 11 || std::stoi(tileMap[Y3][X2]) == 11 || std::stoi(tileMap[Y3][X3]) == 11) {
+	//	return false;
+	//}
 
 	return true;
 }
 
 void TiledMap::update()
 {
-	std::ifstream fileIn("textFile/text.txt");
+	/*std::ifstream fileIn("Assets/tileMaps/map1.txt");
 	if (fileIn.is_open())
 	{
 		for (int i = 0; i < 10; ++i)
@@ -72,7 +104,7 @@ void TiledMap::update()
 				fileIn >> tileMap[j][i];
 		}
 	}
-	fileIn.close();
+	fileIn.close();*/
 }
 
 
@@ -85,10 +117,12 @@ void TiledMap::render()
 		for (int j = 0; j < mapWidth; j++) {
 
 			SDL_Rect sourceRect;
-			sourceRect.x = (map[i][j] % 6) * sourceTileSizePx;
-			sourceRect.y = (map[i][j] / 6) * sourceTileSizePx;
+			
+			sourceRect.x = (std::stoi(tileMap[j][i]) % 6) * sourceTileSizePx;
+			sourceRect.y = (std::stoi(tileMap[j][i]) / 6) * sourceTileSizePx;
 			sourceRect.h = sourceTileSizePx;
 			sourceRect.w = sourceTileSizePx;
+			
 
 			SDL_Rect renderRect;
 			renderRect.x = j * tileWidth;

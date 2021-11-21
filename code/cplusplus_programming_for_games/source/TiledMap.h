@@ -36,14 +36,15 @@ private:
 	int locationX = 0;
 	int locationY = 0;
 
+
+	 
 	std::string tileMap[10][10];
 	
 };
 
 
-
- const int mapWidth = 10;
- const int mapHeight = 10;
+const int mapWidth = 10;
+const int mapHeight = 10;
 const int map[mapHeight][mapWidth] = {
 	{29, 22, 22, 22, 22, 22, 22, 22, 22, 26},
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
@@ -56,4 +57,5 @@ const int map[mapHeight][mapWidth] = {
 	{8, 30, 30, 30, 30, 30, 30, 30, 30, 2},
 	{19, 36, 36, 36, 36, 36, 36, 36, 36, 13 }
 };
+
 
