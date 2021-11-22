@@ -1,7 +1,8 @@
 #include "Player.h"
 
-Player::Player(SDL_Renderer* sdlRenderer, int _windowWidth, int _windowHeight)
+Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth, int _windowHeight)
 {
+	tileMap = _tiledMap;
 	renderer = sdlRenderer;
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;

@@ -58,14 +58,15 @@ int GameLoop::init()
 		keyDown[i] = false;
 	}
 
-	player = new Player(renderer, screenWidth, screenHeight);
-	player->init();
 
 	fontRenderer = std::unique_ptr<FontRenderer>(new FontRenderer(renderer));
 	fontRenderer->init();
 
 	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "assets/tileMap.png", screenWidth, screenHeight));
 	tiledMap->init();
+
+	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight);
+	player->init();
 
 	return 0;
 }

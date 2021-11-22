@@ -7,7 +7,7 @@
 class Player
 {
 public:
-	Player(SDL_Renderer* sdlRenderer, int _windowWidth, int _windowHeight);
+	Player(SDL_Renderer* sdlRenderer, TiledMap* _tileMap, int _windowWidth, int _windowHeight);
 
 	void init();
 
