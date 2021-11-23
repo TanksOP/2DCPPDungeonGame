@@ -14,7 +14,7 @@ int TiledMap::init()
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
 
-	std::ifstream fileIn("Assets/tileMaps/map1.txt");
+	std::ifstream fileIn("Assets/tileMaps/map1.txt"); 
 	if (fileIn.is_open())
 	{
 

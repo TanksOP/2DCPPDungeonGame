@@ -73,6 +73,8 @@ int GameLoop::init()
 
 bool GameLoop::processInput()
 {
+
+	
 	SDL_Event userInput;
 	while (SDL_PollEvent(&userInput)) {
 		if (userInput.type == SDL_QUIT) {
@@ -89,6 +91,13 @@ bool GameLoop::processInput()
 		else if (userInput.type == SDL_KEYUP) {
 			if (userInput.key.keysym.scancode < 512) {
 				keyDown[userInput.key.keysym.scancode] = false;
+			}
+		}
+
+		else if (userInput.type == SDL_MOUSEBUTTONDOWN) {
+			if (userInput.button.button == SDL_BUTTON_LEFT) {
+				SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
+				std::cout << userInput.motion.x << std::endl;
 			}
 		}
 	}
