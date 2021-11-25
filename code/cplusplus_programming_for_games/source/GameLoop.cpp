@@ -68,6 +68,11 @@ int GameLoop::init()
 	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight);
 	player->init();
 
+	bm = new BulletManager(renderer, player);
+	bm->init();
+
+
+
 	return 0;
 }
 
@@ -96,8 +101,13 @@ bool GameLoop::processInput()
 
 		else if (userInput.type == SDL_MOUSEBUTTONDOWN) {
 			if (userInput.button.button == SDL_BUTTON_LEFT) {
-				SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
+				//SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
 				std::cout << userInput.motion.x << std::endl;
+				std::cout << userInput.motion.y << std::endl;
+				bm->CreateBullets();
+
+
+
 			}
 		}
 	}
@@ -116,6 +126,7 @@ void GameLoop::update()
 
 	tiledMap->update();
 	player->update();
+	bm->update();
 	
 }
 
@@ -124,6 +135,8 @@ void GameLoop::render()
 	SDL_RenderClear(renderer);	
 
 	tiledMap->render();
+
+	bm->render();
 	
 
 	fontRenderer->render("Hello", 600, 10, 100, 200 );
@@ -143,6 +156,7 @@ void GameLoop::clean()
 	tiledMap->clean();
 	fontRenderer->clean();
 	player->clean();
+	bm->clean();
 	
 	delete player;
 	SDL_DestroyWindow(window);

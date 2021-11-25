@@ -16,6 +16,14 @@ public:
 	void update();
 
 	void render();
+
+	float GetX() {
+		return x + (playerWidth/2);
+	}
+
+	float GetY() {
+		return y + (playerHeight/2);
+	}
 	
 	void clean();
 
