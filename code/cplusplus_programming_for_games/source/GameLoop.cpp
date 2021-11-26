@@ -120,9 +120,10 @@ bool GameLoop::processInput()
 
 void GameLoop::update()
 {
-	if (score < 20000) {
+	if (score < 200000) {
 		score++;
 	}
+	
 
 	tiledMap->update();
 	player->update();

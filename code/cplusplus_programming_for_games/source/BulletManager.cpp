@@ -24,7 +24,7 @@ void BulletManager::CreateBullets(float targetX, float targetY)
 		//std::cout << "here" << std::endl;
 	}
 }
-
+//SDL_Render
 void BulletManager::update()
 {
 	for (auto& b : bullets) {
@@ -39,7 +39,7 @@ void BulletManager::update()
 
 	auto remove = remove_if(bullets.begin(), bullets.end(),
 	//[](const Bullet& b) {return b.distance > 1000; });
-	[](const Bullet& b) {return b.distance > 5000; });
+	[](const Bullet& b) {return b.distance > 1000; });
 	// if distace > 1000 remove the bullet
 	bullets.erase(remove, bullets.end()); // removes etra spce still in the vector
 }

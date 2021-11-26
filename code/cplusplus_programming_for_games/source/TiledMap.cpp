@@ -52,27 +52,16 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 	*/
 	
 	
-	int X1 = (x) / 80;
-	int X2 = (x + 0.5 * playerWidth) / 80;
-	int X3 = (x + playerWidth)/80;
 	
-	int Y1 = (y ) / 60;
-	int Y2 = (y + 0.5 * playerHeight) / 60;
-	int Y3 = (y + playerHeight) / 60;
+	int X1 = (x) / (windowWidth/mapWidth);
+	int X2 = (x + 0.5 * playerWidth) / (windowWidth / mapWidth);
+	int X3 = (x + playerWidth)/ (windowWidth / mapWidth);
+	
+	int Y1 = (y ) / (windowHeight / mapHeight);
+	int Y2 = (y + 0.5 * playerHeight) / (windowHeight / mapHeight);
+	int Y3 = (y + playerHeight) / (windowHeight / mapHeight);
 
 	
-
-	//for (int i = 0; i < 10; ++i)
-	//{
-	//	for (int j = 0; j < 10; ++j)
-	//	{
-	//		std::cout << tileMap[i][j] << ' ';// = std::stoi(tile);
-	//	
-	//	}
-	//	std::cout << std::endl;
-	//}
-
-	//std::string test = tileMap[0][0];
 	// right side
 	if (tileMap[X3][Y1] == 11 || tileMap[X3][Y2] == 11 ||  tileMap[X3][Y3] == 11) {
 		return false;
@@ -89,38 +78,13 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 	if (tileMap[X1][Y3] == 11 || tileMap[X2][Y3] == 11 || tileMap[X3][Y3] == 11) {
 		return false;
 	}
-	
-	//if (tileMap[Y1][X3] == 11 || tileMap[Y2][X3] == 11 || tileMap[Y3][X3] == 11) {
-	//	return false;
-	//}
-	////left side
-	//if (tileMap[Y1][X1] == 11 || tileMap[Y2][X1] == 11 || tileMap[Y3][X1] == 11) {
-	//	return false;
-	//}
-	////top side
-	//if (tileMap[Y1][X1] == 11 || tileMap[Y1][X2] == 11 || tileMap[Y1][X3] == 11) {
-	//	return false;
-	//}
-	//// bottom side
-	//if (tileMap[Y3][X1] == 11 || tileMap[Y3][X2] == 11 || tileMap[Y3][X3] == 11) {
-	//	return false;
-	//}
 
 	return true;
 }
 
 void TiledMap::update()
 {
-	/*std::ifstream fileIn("Assets/tileMaps/map1.txt");
-	if (fileIn.is_open())
-	{
-		for (int i = 0; i < 10; ++i)
-		{
-			for (int j = 0; j < 10; ++j)
-				fileIn >> tileMap[j][i];
-		}
-	}
-	fileIn.close();*/
+
 }
 
 
