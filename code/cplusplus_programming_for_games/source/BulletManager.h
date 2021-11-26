@@ -23,7 +23,7 @@ public:
 
 	void init();
 
-	void CreateBullets();
+	void CreateBullets(float targetX, float targetY);
 
 	void update();
 
@@ -39,7 +39,7 @@ private:
 	std::vector<Bullet> bullets;
 
 	int shootTimerMS = 300;
-	int bulletVelocity = 1;
+	float bulletVelocity = .1f;
 	unsigned int lastShot = 0;
 
 };

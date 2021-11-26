@@ -102,9 +102,9 @@ bool GameLoop::processInput()
 		else if (userInput.type == SDL_MOUSEBUTTONDOWN) {
 			if (userInput.button.button == SDL_BUTTON_LEFT) {
 				//SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
-				std::cout << userInput.motion.x << std::endl;
-				std::cout << userInput.motion.y << std::endl;
-				bm->CreateBullets();
+				//std::cout << userInput.motion.x << std::endl;
+				//std::cout << userInput.motion.y << std::endl;
+				bm->CreateBullets(userInput.motion.x, userInput.motion.y);
 
 
 
