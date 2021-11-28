@@ -6,8 +6,8 @@ Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth,
 	renderer = sdlRenderer;
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;
-	playerWidth = 0.1f * (float)windowWidth;
-	playerHeight = 0.1f * (float)windowWidth;
+	playerWidth = 0.05f * (float)windowWidth;
+	playerHeight = 0.05f * (float)windowWidth;
 }
 
 void Player::init()
@@ -28,28 +28,28 @@ void Player::processInput(bool* keyDown)
 		if ((x - 0.2f) > 0
 			&& tileMap->pathIsClear(x -0.2f, y, playerWidth, playerHeight)
 			) {
-			x -= 0.2f;
+			x -= 0.2f * playerSpeed;
 		}
 	}
 	if (keyDown[SDL_SCANCODE_RIGHT]) {		
 		if ((x + 0.2f) < (windowWidth - playerWidth) 
 			&& tileMap->pathIsClear(x + 0.2f , y, playerWidth, playerHeight)
 			) {
-			x += 0.2f;
+			x += 0.2f * playerSpeed;
 		}		
 	}
 	if (keyDown[SDL_SCANCODE_UP]) {		
 		if ((y - 0.2f) > 0
 			&& tileMap->pathIsClear(x, y - 0.2f, playerWidth, playerHeight)
 			) {
-			y -= 0.2f;
+			y -= 0.2f * playerSpeed;
 		}
 	}
 	if (keyDown[SDL_SCANCODE_DOWN]) {
 		if ((y + 0.2f) < (windowHeight - playerHeight)
 			&& tileMap->pathIsClear(x, y + 0.2f, playerWidth, playerHeight)
 			) {
-			y += 0.2f;
+			y += 0.2f * playerSpeed;
 		}
 	}
 }

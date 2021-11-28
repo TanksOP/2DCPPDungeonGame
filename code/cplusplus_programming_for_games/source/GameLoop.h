@@ -32,12 +32,15 @@ private:
 
 	// creates a why to turn on and off key presses
 	bool keyDown[512];
+	bool MouseLeftButton = false;
+
 
 	std::unique_ptr<FontRenderer> fontRenderer;
 	std::unique_ptr<TiledMap> tiledMap;
 
 	BulletManager* bm = nullptr;
-
 	Player* player = nullptr;
+	
+
 };
 

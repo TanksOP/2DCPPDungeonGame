@@ -1,9 +1,10 @@
 #include "BulletManager.h"
 
-BulletManager::BulletManager(SDL_Renderer* _renderer, Player* _player)
+BulletManager::BulletManager(SDL_Renderer* _renderer, Player* _player, TiledMap* _tiledMap)
 {
 	renderer = _renderer;
 	player = _player;
+	tileMap = _tiledMap;
 	
 }
 
@@ -14,35 +15,51 @@ void BulletManager::init()
 	SDL_FreeSurface(surface);
 }
 
-void BulletManager::CreateBullets(float targetX, float targetY) 
+void BulletManager::CreateBullets(bool MouseLeftButton)
 {
-	float testRotation = atan2f(targetY - player->GetY(), targetX - player->GetX());
-	std::cout << testRotation << std::endl;
-	if (SDL_GetTicks() - lastShot > shootTimerMS) {
-		bullets.push_back(Bullet{ player->GetX() , player->GetY(), testRotation + (0.5f * 3.14159265f) ,0.0f });
-		lastShot = SDL_GetTicks();
-		//std::cout << "here" << std::endl;
+	if (MouseLeftButton)
+	{
+		if (SDL_GetTicks() - lastShot > shootTimerMS) {
+			SDL_GetMouseState(&mouseX, &mouseY);
+			float testRotation = atan2f(mouseY - player->GetY(), mouseX - player->GetX());
+			std::cout << testRotation << std::endl;
+			bullets.push_back(Bullet{ player->GetX() , player->GetY(), testRotation + (0.5f * 3.14159265f) ,0.0f });
+			lastShot = SDL_GetTicks();
+			//std::cout << "here" << std::endl;
+		}
 	}
+	
 }
+
 //SDL_Render
 void BulletManager::update()
 {
 	for (auto& b : bullets) {
-		//b.x += 0.1;
-		//b.y -= 0;
-		b.x += sin(b.rotation) * bulletVelocity;
-		b.y -= cos(b.rotation) * bulletVelocity;
-		/*b.x += sin(b.rotation * PI / 180.0f) * bulletVelocity;
-		b.y -= cos(b.rotation * PI / 180.0f) * bulletVelocity;*/
-		b.distance += bulletVelocity;
+		
+		if (tileMap->pathIsClear(b.x + sin(b.rotation) * bulletVelocity, b.y - cos(b.rotation) * bulletVelocity, 20, 20))
+		{
+			b.x += sin(b.rotation) * bulletVelocity;
+			b.y -= cos(b.rotation) * bulletVelocity;
+			b.distance += bulletVelocity;
+		}
+		else {
+			b.distance = 1001;
+		
+		}
 	}
 
 	auto remove = remove_if(bullets.begin(), bullets.end(),
-	//[](const Bullet& b) {return b.distance > 1000; });
-	[](const Bullet& b) {return b.distance > 1000; });
+	[](const Bullet& b) {
+			return b.distance > 1000 ||
+		b.y < 1 ||
+		b.x < 1 ||
+		b.y > 579||
+		b.x > 779; });
+
 	// if distace > 1000 remove the bullet
 	bullets.erase(remove, bullets.end()); // removes etra spce still in the vector
 }
+
 
 void BulletManager::render()
 {
@@ -50,7 +67,7 @@ void BulletManager::render()
 	SDL_Point center = { 5,5 };
 	for (auto& b : bullets) {
 		SDL_Rect dest = { b.x, b.y, 20, 20 };
-		SDL_RenderCopyEx(renderer, bulletTexture, 0, &dest, b.rotation, &center, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(renderer, bulletTexture, 0, &dest, b.rotation / PI * 180.0f, &center, SDL_FLIP_NONE);
 
 	}
 }

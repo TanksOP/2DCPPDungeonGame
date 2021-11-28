@@ -14,13 +14,13 @@ int TiledMap::init()
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
 
-	std::ifstream fileIn("Assets/tileMaps/map1.txt"); 
+	std::ifstream fileIn("Assets/tileMaps/map2.txt"); 
 	if (fileIn.is_open())
 	{
 
-		for (int i = 0; i < 10; ++i)
+		for (int i = 0; i < 20; ++i)
 		{
-			for (int j = 0; j < 10; ++j)
+			for (int j = 0; j < 20; ++j)
 			{
 				std::string tile;
 				fileIn >> tile;
@@ -35,7 +35,7 @@ int TiledMap::init()
 
 }
 
-bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeight)
+bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 {
 	
 	/*
@@ -54,28 +54,28 @@ bool TiledMap::pathIsClear(float x, float y, float playerWidth, float playerHeig
 	
 	
 	int X1 = (x) / (windowWidth/mapWidth);
-	int X2 = (x + 0.5 * playerWidth) / (windowWidth / mapWidth);
-	int X3 = (x + playerWidth)/ (windowWidth / mapWidth);
+	int X2 = (x + 0.5 * _width) / (windowWidth / mapWidth);
+	int X3 = (x + _width)/ (windowWidth / mapWidth);
 	
 	int Y1 = (y ) / (windowHeight / mapHeight);
-	int Y2 = (y + 0.5 * playerHeight) / (windowHeight / mapHeight);
-	int Y3 = (y + playerHeight) / (windowHeight / mapHeight);
+	int Y2 = (y + 0.5 * _height) / (windowHeight / mapHeight);
+	int Y3 = (y + _height) / (windowHeight / mapHeight);
 
 	
 	// right side
-	if (tileMap[X3][Y1] == 11 || tileMap[X3][Y2] == 11 ||  tileMap[X3][Y3] == 11) {
+	if (tileMap[X3][Y1] == 56 || tileMap[X3][Y2] == 56 ||  tileMap[X3][Y3] == 56) {
 		return false;
 	}
 	//left side
-	if (tileMap[X1][Y1] == 11 || tileMap[X1][Y2] == 11 || tileMap[X1][Y3] == 11) {
+	if (tileMap[X1][Y1] == 56 || tileMap[X1][Y2] == 56 || tileMap[X1][Y3] == 56) {
 		return false;
 	}
 	//top side
-	if (tileMap[X1][Y1] == 11 || tileMap[X2][Y1] == 11 || tileMap[X3][Y1] == 11) {
+	if (tileMap[X1][Y1] == 56 || tileMap[X2][Y1] == 56 || tileMap[X3][Y1] == 56) {
 		return false;
 	}
 	// bottom side
-	if (tileMap[X1][Y3] == 11 || tileMap[X2][Y3] == 11 || tileMap[X3][Y3] == 11) {
+	if (tileMap[X1][Y3] == 56 || tileMap[X2][Y3] == 56 || tileMap[X3][Y3] == 56) {
 		return false;
 	}
 
@@ -98,8 +98,8 @@ void TiledMap::render()
 
 			SDL_Rect sourceRect;
 			
-			sourceRect.x = (tileMap[j][i] % 6) * sourceTileSizePx;
-			sourceRect.y = (tileMap[j][i] / 6) * sourceTileSizePx;
+			sourceRect.x = (tileMap[j][i] % 7) * sourceTileSizePx;
+			sourceRect.y = (tileMap[j][i] / 7) * sourceTileSizePx;
 			sourceRect.h = sourceTileSizePx;
 			sourceRect.w = sourceTileSizePx;
 			

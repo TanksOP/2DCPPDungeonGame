@@ -31,8 +31,9 @@ public:
 
 private:
 	
-	float playerSpeed = 1;
-	float x, y;
+	float playerSpeed = 0.5;
+	float x = 100;
+	float y = 100;
 
 	int windowWidth = 0;
 	int windowHeight = 0;

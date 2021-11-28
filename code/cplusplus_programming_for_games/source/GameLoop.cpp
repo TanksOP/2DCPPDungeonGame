@@ -62,13 +62,13 @@ int GameLoop::init()
 	fontRenderer = std::unique_ptr<FontRenderer>(new FontRenderer(renderer));
 	fontRenderer->init();
 
-	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "assets/tileMap.png", screenWidth, screenHeight));
+	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "Assets/DungeonTileset/DungeonTilesetII.png", screenWidth, screenHeight));
 	tiledMap->init();
 
 	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight);
 	player->init();
 
-	bm = new BulletManager(renderer, player);
+	bm = new BulletManager(renderer, player, tiledMap.get());
 	bm->init();
 
 
@@ -101,18 +101,24 @@ bool GameLoop::processInput()
 
 		else if (userInput.type == SDL_MOUSEBUTTONDOWN) {
 			if (userInput.button.button == SDL_BUTTON_LEFT) {
-				//SDL_ShowSimpleMessageBox(0, "Mouse", "Left button was pressed!", window);
-				//std::cout << userInput.motion.x << std::endl;
-				//std::cout << userInput.motion.y << std::endl;
-				bm->CreateBullets(userInput.motion.x, userInput.motion.y);
-
-
-
+				MouseLeftButton = true;
+				//bm->CreateBullets(MouseLeftButton, userInput.motion.x, userInput.motion.y);
+			}
+		}
+		else if (userInput.type == SDL_MOUSEBUTTONUP) {
+			if (userInput.button.button == SDL_BUTTON_LEFT) {
+				MouseLeftButton = false;
+				//bm->CreateBullets(MouseLeftButton, userInput.motion.x, userInput.motion.y);
 			}
 		}
 	}
 
 	player->processInput(keyDown);
+	
+
+	bm->CreateBullets(MouseLeftButton);
+	
+	
 
 	return true;
 

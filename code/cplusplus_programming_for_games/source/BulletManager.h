@@ -15,7 +15,7 @@
 class BulletManager
 {
 public:
-	BulletManager(SDL_Renderer* _renderer, Player* _player);
+	BulletManager(SDL_Renderer* _renderer, Player* _player, TiledMap* _tiledMap);
 
 	struct Bullet {
 		float x, y, rotation, distance;
@@ -23,7 +23,7 @@ public:
 
 	void init();
 
-	void CreateBullets(float targetX, float targetY);
+	void CreateBullets(bool MouseLeftButton);
 
 	void update();
 
@@ -34,6 +34,7 @@ public:
 private:
 	SDL_Renderer* renderer;
 	Player* player;
+	TiledMap* tileMap;
 	
 	SDL_Texture* bulletTexture;
 	std::vector<Bullet> bullets;
@@ -41,6 +42,8 @@ private:
 	int shootTimerMS = 300;
 	float bulletVelocity = .1f;
 	unsigned int lastShot = 0;
+
+	int mouseX, mouseY;
 
 };
 

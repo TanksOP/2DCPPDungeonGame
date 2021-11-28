@@ -15,7 +15,9 @@ public:
 
 	int init();
 
-	bool pathIsClear(float x, float y, float playerWidth, float playerHeight);
+	// player
+	bool pathIsClear(float x, float y, float _width, float _height);
+
 
 	void update();
 
@@ -26,7 +28,7 @@ public:
 private:
 	int windowWidth = 0;
 	int windowHeight = 0;
-	const int sourceTileSizePx = 70;
+	const int sourceTileSizePx = 16;
 
 	int tileWidth = 100; // change this to screen width 
 	int tileHeight = 100; // chaneg this to screen width
@@ -38,11 +40,11 @@ private:
 	int locationX = 0;
 	int locationY = 0;
 
-	const int mapWidth = 10;
-	const int mapHeight = 10;
+	int mapWidth = 20;
+	int mapHeight = 20;
 
 	 
-	std::array< std::array<int, 10>, 10 > tileMap;
+	std::array< std::array<int, 20>, 20 > tileMap;
 };
 
 
