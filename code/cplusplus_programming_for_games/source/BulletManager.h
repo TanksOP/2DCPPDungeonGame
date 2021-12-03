@@ -14,6 +14,7 @@
 
 class BulletManager
 {
+	friend class EnemyContoller;
 public:
 	BulletManager(SDL_Renderer* _renderer, Player* _player, TiledMap* _tiledMap);
 

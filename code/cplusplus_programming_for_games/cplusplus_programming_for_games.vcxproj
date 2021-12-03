@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\EnemyContoller.cpp" />
     <ClCompile Include="source\BulletManager.cpp" />
     <ClCompile Include="source\FontRenderer.cpp" />
     <ClCompile Include="source\Player.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="source\TiledMap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\EnemyContoller.h" />
     <ClInclude Include="source\BulletManager.h" />
     <ClInclude Include="source\FontRenderer.h" />
     <ClInclude Include="source\Player.h" />

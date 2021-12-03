@@ -71,6 +71,9 @@ int GameLoop::init()
 	bm = new BulletManager(renderer, player, tiledMap.get());
 	bm->init();
 
+	ec = new EnemyContoller(renderer, bm);
+	ec->init();
+
 
 
 	return 0;
@@ -134,6 +137,7 @@ void GameLoop::update()
 	tiledMap->update();
 	player->update();
 	bm->update();
+	ec->update();
 	
 }
 
@@ -142,8 +146,8 @@ void GameLoop::render()
 	SDL_RenderClear(renderer);	
 
 	tiledMap->render();
-
 	bm->render();
+	ec->render();
 	
 
 	fontRenderer->render("Hello", 600, 10, 100, 200 );
@@ -164,6 +168,7 @@ void GameLoop::clean()
 	fontRenderer->clean();
 	player->clean();
 	bm->clean();
+	ec->clean();
 	
 	delete player;
 	SDL_DestroyWindow(window);

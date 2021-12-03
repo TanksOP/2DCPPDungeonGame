@@ -9,6 +9,7 @@
 #include "FontRenderer.h"
 #include "TiledMap.h"
 #include "BulletManager.h"
+#include "EnemyContoller.h"
 
 
 class GameLoop
@@ -39,6 +40,7 @@ private:
 	std::unique_ptr<TiledMap> tiledMap;
 
 	BulletManager* bm = nullptr;
+	EnemyContoller* ec = nullptr;
 	Player* player = nullptr;
 	
 
