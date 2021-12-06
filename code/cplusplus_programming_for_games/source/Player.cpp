@@ -7,12 +7,12 @@ Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth,
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;
 	playerWidth = 0.05f * (float)windowWidth;
-	playerHeight = 0.05f * (float)windowWidth;
+	playerHeight = 0.08f * (float)windowWidth;
 }
 
 void Player::init()
 {
-	SDL_Surface* image = IMG_Load("assets/chibiCarlo.png");
+	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/frames/knight_f_idle_anim_f0.png");
 	if (image == nullptr)
 	{
 		std::cout << "Could not load image" << std::endl;

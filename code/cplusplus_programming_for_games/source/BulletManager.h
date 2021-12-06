@@ -40,7 +40,7 @@ private:
 	SDL_Texture* bulletTexture;
 	std::vector<Bullet> bullets;
 
-	int shootTimerMS = 300;
+	int shootTimerMS = 1000.0f;
 	float bulletVelocity = .1f;
 	unsigned int lastShot = 0;
 
