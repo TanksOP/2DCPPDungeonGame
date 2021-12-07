@@ -19,7 +19,16 @@ void Player::init()
 		return;
 	}
 	texture = SDL_CreateTextureFromSurface(renderer, image);
+
+	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/DungeonTilesetII.png");
+	if (image == nullptr)
+	{
+		std::cout << "Could not load image" << std::endl;
+		return;
+	}
+	texture2 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
+	
 }
 
 void Player::processInput(bool* keyDown)
@@ -57,6 +66,20 @@ void Player::processInput(bool* keyDown)
 void Player::update()
 {
 
+	if (SDL_GetTicks() - lastAnimation > animationTimer) {
+		animationUpdate();
+
+		lastAnimation = SDL_GetTicks();
+	}
+}
+
+void Player::animationUpdate()
+{
+	std::cout << "hello" << std::endl;
+
+	// add in stuff from tile map scripts and read the values for the player idle animation
+	// create  avariable that after settign the texture to the animation picture it set the new animation frame
+	// so that it can be used when it goes back through and chanegs the texture 
 }
 
 void Player::render()

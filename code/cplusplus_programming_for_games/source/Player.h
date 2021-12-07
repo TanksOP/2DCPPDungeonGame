@@ -15,7 +15,11 @@ public:
 
 	void update();
 
+	void animationUpdate();
+
 	void render();
+
+	
 
 	float GetX() {
 		return x + (playerWidth/2);
@@ -40,10 +44,14 @@ private:
 	float playerWidth = 0;
 	float playerHeight = 0;
 
+	float animationTimer = 200.0f;
+	float lastAnimation = 0.0f;
+
 	//SDL_Rect player;
 
 	SDL_Renderer* renderer = nullptr;
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* texture2 = nullptr;
 
 	TiledMap* tileMap;
 
