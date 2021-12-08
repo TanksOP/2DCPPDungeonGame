@@ -7,7 +7,9 @@ Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth,
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;
 	playerWidth = 0.05f * (float)windowWidth;
-	playerHeight = 0.08f * (float)windowWidth;
+	playerHeight = 0.1f * (float)windowHeight;
+	
+	
 }
 
 void Player::init()
@@ -19,15 +21,15 @@ void Player::init()
 		return;
 	}
 	texture = SDL_CreateTextureFromSurface(renderer, image);
-
-	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/DungeonTilesetII.png");
-	if (image == nullptr)
+	SDL_FreeSurface(image);
+	SDL_Surface* image2 = IMG_Load("Assets/DungeonTileset/DungeonTilesetII.png");
+	if (image2 == nullptr)
 	{
 		std::cout << "Could not load image" << std::endl;
 		return;
 	}
-	texture2 = SDL_CreateTextureFromSurface(renderer, image);
-	SDL_FreeSurface(image);
+	texture2 = SDL_CreateTextureFromSurface(renderer, image2);
+	SDL_FreeSurface(image2);
 	
 }
 
@@ -38,6 +40,13 @@ void Player::processInput(bool* keyDown)
 			&& tileMap->pathIsClear(x -0.2f, y, playerWidth, playerHeight)
 			) {
 			x -= 0.2f * playerSpeed;
+
+			// below changes the animations from idle animations to runnign animations
+			if (currentPlayerFrame >= 42 && currentPlayerFrame <= 45) {
+				currentPlayerFrame = 46;
+			}
+			// makes the player face the diretion of movment
+			flipPlayer = true;
 		}
 	}
 	if (keyDown[SDL_SCANCODE_RIGHT]) {		
@@ -45,6 +54,14 @@ void Player::processInput(bool* keyDown)
 			&& tileMap->pathIsClear(x + 0.2f , y, playerWidth, playerHeight)
 			) {
 			x += 0.2f * playerSpeed;
+
+			// below changes the animations from idle animations to runnign animations
+			if (currentPlayerFrame >= 42 && currentPlayerFrame <= 45) {
+				currentPlayerFrame = 46;
+			}
+			// makes the player face the diretion of movment
+			flipPlayer = false;
+			
 		}		
 	}
 	if (keyDown[SDL_SCANCODE_UP]) {		
@@ -52,6 +69,11 @@ void Player::processInput(bool* keyDown)
 			&& tileMap->pathIsClear(x, y - 0.2f, playerWidth, playerHeight)
 			) {
 			y -= 0.2f * playerSpeed;
+
+			// below changes the animations from idle animations to runnign animations
+			if (currentPlayerFrame >= 42 && currentPlayerFrame <= 45) {
+				currentPlayerFrame = 46;
+			}
 		}
 	}
 	if (keyDown[SDL_SCANCODE_DOWN]) {
@@ -59,13 +81,24 @@ void Player::processInput(bool* keyDown)
 			&& tileMap->pathIsClear(x, y + 0.2f, playerWidth, playerHeight)
 			) {
 			y += 0.2f * playerSpeed;
+
+			// below changes the animations from idle animations to runnign animations
+			if (currentPlayerFrame >= 42 && currentPlayerFrame <= 45) {
+				currentPlayerFrame = 46;
+			}
 		}
+	}
+
+	if (!keyDown[SDL_SCANCODE_LEFT] && !keyDown[SDL_SCANCODE_DOWN] && !keyDown[SDL_SCANCODE_RIGHT] && !keyDown[SDL_SCANCODE_UP] 
+		&& currentPlayerFrame >= 46 && currentPlayerFrame <= 49)
+	{
+		currentPlayerFrame = 42;
 	}
 }
 
 void Player::update()
 {
-
+	// creating animation frames so that every 200 ms is a new frame
 	if (SDL_GetTicks() - lastAnimation > animationTimer) {
 		animationUpdate();
 
@@ -75,18 +108,50 @@ void Player::update()
 
 void Player::animationUpdate()
 {
-	std::cout << "hello" << std::endl;
+	
 
-	// add in stuff from tile map scripts and read the values for the player idle animation
-	// create  avariable that after settign the texture to the animation picture it set the new animation frame
-	// so that it can be used when it goes back through and chanegs the texture 
+
+	// the code below switches the animation states between idle and running
+	if (currentPlayerFrame == 45) {
+		currentPlayerFrame = 42;
+	}
+	else if (currentPlayerFrame == 49) {
+		currentPlayerFrame = 46;
+	}
+	else {
+		currentPlayerFrame += 1;
+	}
+	
 }
 
 void Player::render()
 {
 	SDL_Rect r = { x , y, (int)playerWidth, (int)playerHeight };
+
+	SDL_Rect sourceRect;
+	sourceRect.x = (currentPlayerFrame % 17) * playerSourceWidthPx;
+	sourceRect.y = (currentPlayerFrame / 17) * playerSourceHeightPx;
+	sourceRect.h = playerSourceHeightPx;
+	sourceRect.w = playerSourceWidthPx;
+
+
+	SDL_Rect renderRect;
+	renderRect.x = x;
+	renderRect.y = y;
+	renderRect.h = (int)playerHeight;
+	renderRect.w = (int)playerWidth;
+
 	
-	SDL_RenderCopy(renderer, texture, NULL, &r); // renders the player based off of rect r
+	
+	if (flipPlayer) {
+		SDL_RenderCopyEx(renderer, texture2, &sourceRect, &renderRect, 0, NULL, SDL_FLIP_HORIZONTAL);
+	}
+	else {
+		SDL_RenderCopy(renderer, texture2, &sourceRect, &renderRect);
+	}
+	
+	
+	//SDL_RenderCopy(renderer, texture, NULL, &r); // renders the player based off of rect r
 }
 
 void Player::clean() 

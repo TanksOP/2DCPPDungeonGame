@@ -12,7 +12,7 @@ void FontRenderer::init()
 	{
 		std::cout << SDL_GetError() << std::endl;
 	}
-	font = TTF_OpenFont("assets/fonts/orangeJuice.ttf",200);
+	font = TTF_OpenFont("assets/fonts/orangeJuice.ttf",80);
 	if (font == NULL)
 	{
 		std::cout << SDL_GetError() << std::endl;

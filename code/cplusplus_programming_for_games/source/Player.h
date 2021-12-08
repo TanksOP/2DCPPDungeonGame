@@ -35,7 +35,7 @@ public:
 
 private:
 	
-	float playerSpeed = 0.5;
+	float playerSpeed = 0.25;
 	float x = 100;
 	float y = 100;
 
@@ -44,8 +44,18 @@ private:
 	float playerWidth = 0;
 	float playerHeight = 0;
 
+	int playerSourceHeightPx = 32;
+	int playerSourceWidthPx = 16;
+
+	// used to create animation frames for the player
 	float animationTimer = 200.0f;
 	float lastAnimation = 0.0f;
+	// allow for the abity yo filp the texture of the player depending on which direction they are moving in
+	bool flipPlayer = false;
+	
+
+	// the current animations for the player 42-45: idle animation and 46-49: running animation
+	int currentPlayerFrame = 42;
 
 	//SDL_Rect player;
 
