@@ -19,6 +19,7 @@ public:
 private:
 	SDL_Renderer* renderer;
 	TTF_Font* font;
+	TTF_Font* font2;
 
 };
 

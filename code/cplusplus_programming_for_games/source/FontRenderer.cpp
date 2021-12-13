@@ -17,6 +17,11 @@ void FontRenderer::init()
 	{
 		std::cout << SDL_GetError() << std::endl;
 	}
+	font2 = TTF_OpenFont("assets/fonts/Kreon.ttf", 20);
+	if (font2 == NULL)
+	{
+		std::cout << SDL_GetError() << std::endl;
+	}
 }
 
 void FontRenderer::render(std::string text, int x, int y, int height, int width)
@@ -34,7 +39,7 @@ void FontRenderer::render(std::string text, int x, int y, int height, int width)
 	corner.w = width;
 
 	// creates an image representing the text inputed 
-	SDL_Surface* textImage = TTF_RenderText_Solid(font, text.c_str(), colour);
+	SDL_Surface* textImage = TTF_RenderText_Solid(font2, text.c_str(), colour);
 	//now to render it
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, textImage);
 	SDL_RenderCopy(renderer, texture, NULL, &corner);
@@ -48,4 +53,5 @@ void FontRenderer::clean()
 {
 	//free all reasiurces use to render
 	TTF_CloseFont(font);
+	TTF_CloseFont(font2);
 }

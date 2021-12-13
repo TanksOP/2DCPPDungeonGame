@@ -53,6 +53,9 @@ int GameLoop::init()
 		return -1;
 	}
 
+	// sets the game to full screen
+	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
+
 	// sets all values in keydown to false so no keys are being pressed
 	for (int i = 0; i < 256; i++) {
 		keyDown[i] = false;
@@ -150,8 +153,8 @@ void GameLoop::render()
 	ec->render();
 	
 
-	fontRenderer->render("Hello", 600, 10, 100, 200 );
-	fontRenderer->render("Hi",600, 100, 100, 100);	
+	fontRenderer->render("Lives", 100, 5, 75, 50 );
+	fontRenderer->render("score", 600, 5, 75, 50);	
 	fontRenderer->render(std::to_string(score), 600, 200, 100, 100); 
 
 	
