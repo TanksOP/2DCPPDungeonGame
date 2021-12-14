@@ -35,7 +35,7 @@ void Player::init()
 
 void Player::processInput(bool* keyDown)
 {
-	if (keyDown[SDL_SCANCODE_LEFT]) {		
+	if (keyDown[SDL_SCANCODE_LEFT] || keyDown[SDL_SCANCODE_A]) {
 		if ((x - 0.2f) > 0
 			&& tileMap->pathIsClear(x -0.2f, y, playerWidth, playerHeight)
 			) {
@@ -49,7 +49,7 @@ void Player::processInput(bool* keyDown)
 			flipPlayer = true;
 		}
 	}
-	if (keyDown[SDL_SCANCODE_RIGHT]) {		
+	if (keyDown[SDL_SCANCODE_RIGHT] || keyDown[SDL_SCANCODE_D]) {
 		if ((x + 0.2f) < (windowWidth - playerWidth) 
 			&& tileMap->pathIsClear(x + 0.2f , y, playerWidth, playerHeight)
 			) {
@@ -64,7 +64,7 @@ void Player::processInput(bool* keyDown)
 			
 		}		
 	}
-	if (keyDown[SDL_SCANCODE_UP]) {		
+	if (keyDown[SDL_SCANCODE_UP] || keyDown[SDL_SCANCODE_W]) {
 		if ((y - 0.2f) > 0
 			&& tileMap->pathIsClear(x, y - 0.2f, playerWidth, playerHeight)
 			) {
@@ -76,7 +76,7 @@ void Player::processInput(bool* keyDown)
 			}
 		}
 	}
-	if (keyDown[SDL_SCANCODE_DOWN]) {
+	if (keyDown[SDL_SCANCODE_DOWN] || keyDown[SDL_SCANCODE_S]) {
 		if ((y + 0.2f) < (windowHeight - playerHeight)
 			&& tileMap->pathIsClear(x, y + 0.2f, playerWidth, playerHeight)
 			) {
@@ -90,6 +90,7 @@ void Player::processInput(bool* keyDown)
 	}
 
 	if (!keyDown[SDL_SCANCODE_LEFT] && !keyDown[SDL_SCANCODE_DOWN] && !keyDown[SDL_SCANCODE_RIGHT] && !keyDown[SDL_SCANCODE_UP] 
+		&& !keyDown[SDL_SCANCODE_A] && !keyDown[SDL_SCANCODE_S] && !keyDown[SDL_SCANCODE_D] && !keyDown[SDL_SCANCODE_W]
 		&& currentPlayerFrame >= 46 && currentPlayerFrame <= 49)
 	{
 		currentPlayerFrame = 42;

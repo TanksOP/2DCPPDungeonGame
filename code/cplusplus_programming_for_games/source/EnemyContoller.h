@@ -14,6 +14,8 @@ public:
 	{
 		float x, y;
 		bool alive;
+		int health;
+		int maxHealth;
 	};
 
 	void init();
@@ -28,6 +30,7 @@ public:
 
 private:
 	SDL_Texture* enemyTexture;
+	SDL_Texture* enemyHealthTexture;
 	SDL_Renderer* renderer;
 	std::vector<Enemy> enemys;
 

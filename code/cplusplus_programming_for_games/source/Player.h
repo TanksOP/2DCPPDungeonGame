@@ -35,7 +35,7 @@ public:
 
 private:
 	
-	float playerSpeed = 0.25;
+	float playerSpeed = 0.1;
 	float x = 100;
 	float y = 100;
 

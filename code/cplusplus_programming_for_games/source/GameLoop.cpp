@@ -153,8 +153,8 @@ void GameLoop::render()
 	ec->render();
 	
 
-	fontRenderer->render("Lives", 100, 5, 75, 50 );
-	fontRenderer->render("score", 600, 5, 75, 50);	
+	fontRenderer->render("Lives:", 32, 5, 75, 80 );
+	fontRenderer->render("Score", 475, 5, 75, 75);	
 	fontRenderer->render(std::to_string(score), 600, 200, 100, 100); 
 
 	
