@@ -6,6 +6,7 @@
 
 class Player
 {
+	friend class EnemyContoller;
 public:
 	Player(SDL_Renderer* sdlRenderer, TiledMap* _tileMap, int _windowWidth, int _windowHeight);
 
@@ -38,6 +39,7 @@ private:
 	float playerSpeed = 0.1;
 	float x = 100;
 	float y = 100;
+	int health = 6;
 
 	int windowWidth = 0;
 	int windowHeight = 0;
@@ -60,8 +62,10 @@ private:
 	//SDL_Rect player;
 
 	SDL_Renderer* renderer = nullptr;
-	SDL_Texture* texture = nullptr;
-	SDL_Texture* texture2 = nullptr;
+	SDL_Texture* heartFullTexture = nullptr;
+	SDL_Texture* heartHalfTexture = nullptr;
+	SDL_Texture* heartEmptyTexture = nullptr;
+	SDL_Texture* playerTexture = nullptr;
 
 	TiledMap* tileMap;
 

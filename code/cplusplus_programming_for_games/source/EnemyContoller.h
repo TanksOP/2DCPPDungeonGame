@@ -4,11 +4,12 @@
 #include <vector>
 #include <iostream>
 #include "BulletManager.h"
+#include "Player.h"
 
 class EnemyContoller
 {
 public: 
-	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager);
+	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player);
 
 	struct Enemy
 	{
@@ -35,6 +36,7 @@ private:
 	std::vector<Enemy> enemys;
 
 	BulletManager* bulletManager;
+	Player* player;
 
 
 

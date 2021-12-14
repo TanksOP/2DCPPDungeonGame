@@ -7,29 +7,45 @@ Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth,
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;
 	playerWidth = 0.05f * (float)windowWidth;
-	playerHeight = 0.1f * (float)windowHeight;
-	
-	
+	playerHeight = 0.1f * (float)windowHeight;	
 }
 
 void Player::init()
 {
-	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/frames/knight_f_idle_anim_f0.png");
-	if (image == nullptr)
-	{
+	//importing the lives        might change later to just use the tile map to get these idk
+	// importing the tile map
+	SDL_Surface* image1 = IMG_Load("Assets/DungeonTileset/frames/ui_heart_full.png");
+	if (image1 == nullptr) {
 		std::cout << "Could not load image" << std::endl;
 		return;
 	}
-	texture = SDL_CreateTextureFromSurface(renderer, image);
-	SDL_FreeSurface(image);
-	SDL_Surface* image2 = IMG_Load("Assets/DungeonTileset/DungeonTilesetII.png");
-	if (image2 == nullptr)
-	{
+	heartFullTexture = SDL_CreateTextureFromSurface(renderer, image1);
+	SDL_FreeSurface(image1);
+
+	SDL_Surface* image2 = IMG_Load("Assets/DungeonTileset/frames/ui_heart_half.png");
+	if (image2 == nullptr) {
 		std::cout << "Could not load image" << std::endl;
 		return;
 	}
-	texture2 = SDL_CreateTextureFromSurface(renderer, image2);
+	heartHalfTexture = SDL_CreateTextureFromSurface(renderer, image2);
 	SDL_FreeSurface(image2);
+
+	SDL_Surface* image3 = IMG_Load("Assets/DungeonTileset/frames/ui_heart_empty.png");
+	if (image3 == nullptr) {
+		std::cout << "Could not load image" << std::endl;
+		return;
+	}
+	heartEmptyTexture = SDL_CreateTextureFromSurface(renderer, image3);
+	SDL_FreeSurface(image3);
+
+	// importing the tile map
+	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/DungeonTilesetII.png");
+	if (image == nullptr){
+		std::cout << "Could not load image" << std::endl;
+		return;
+	}
+	playerTexture = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
 	
 }
 
@@ -104,14 +120,12 @@ void Player::update()
 		animationUpdate();
 
 		lastAnimation = SDL_GetTicks();
+		
 	}
 }
 
 void Player::animationUpdate()
 {
-	
-
-
 	// the code below switches the animation states between idle and running
 	if (currentPlayerFrame == 45) {
 		currentPlayerFrame = 42;
@@ -121,12 +135,14 @@ void Player::animationUpdate()
 	}
 	else {
 		currentPlayerFrame += 1;
-	}
-	
+	}	
 }
 
 void Player::render()
 {
+
+	// render player 
+
 	SDL_Rect r = { x , y, (int)playerWidth, (int)playerHeight };
 
 	SDL_Rect sourceRect;
@@ -140,24 +156,69 @@ void Player::render()
 	renderRect.x = x;
 	renderRect.y = y;
 	renderRect.h = (int)playerHeight;
-	renderRect.w = (int)playerWidth;
-
-	
+	renderRect.w = (int)playerWidth;	
 	
 	if (flipPlayer) {
-		SDL_RenderCopyEx(renderer, texture2, &sourceRect, &renderRect, 0, NULL, SDL_FLIP_HORIZONTAL);
+		SDL_RenderCopyEx(renderer, playerTexture, &sourceRect, &renderRect, 0, NULL, SDL_FLIP_HORIZONTAL);
 	}
 	else {
-		SDL_RenderCopy(renderer, texture2, &sourceRect, &renderRect);
+		SDL_RenderCopy(renderer, playerTexture, &sourceRect, &renderRect);
 	}
-	
-	
-	//SDL_RenderCopy(renderer, texture, NULL, &r); // renders the player based off of rect r
+
+	// render player lives
+
+	SDL_Rect renderLife1 = { 125, 25, 45, 45 };
+	SDL_Rect renderLife2 = { 175, 25, 45, 45 };
+	SDL_Rect renderLife3 = { 225, 25, 45, 45 };
+
+	switch (health)
+	{
+	case 0:
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife3);
+		break;
+	case 1:
+		SDL_RenderCopy(renderer, heartHalfTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife3);
+		break;
+	case 2:
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife3);
+		break;
+	case 3:
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartHalfTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife3);
+		break;
+	case 4:
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartEmptyTexture, 0, &renderLife3);
+		break;
+	case 5:
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartHalfTexture, 0, &renderLife3);
+		break;
+	case 6 :
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife1);
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife2);
+		SDL_RenderCopy(renderer, heartFullTexture, 0, &renderLife3);
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::clean() 
 {
-	SDL_DestroyTexture(texture);
+	SDL_DestroyTexture(playerTexture);
+	SDL_DestroyTexture(heartFullTexture);
+	SDL_DestroyTexture(heartHalfTexture);
+	SDL_DestroyTexture(heartEmptyTexture);
 }
 
 

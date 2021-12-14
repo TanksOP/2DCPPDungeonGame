@@ -74,7 +74,7 @@ int GameLoop::init()
 	bm = new BulletManager(renderer, player, tiledMap.get());
 	bm->init();
 
-	ec = new EnemyContoller(renderer, bm);
+	ec = new EnemyContoller(renderer, bm, player);
 	ec->init();
 
 

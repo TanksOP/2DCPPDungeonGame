@@ -1,9 +1,10 @@
 #include "EnemyContoller.h"
 
-EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager)
+EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player)
 {
 	renderer = _renderer;
 	bulletManager = _bulletManager;
+	player = _player;
 
 }
 
@@ -51,7 +52,7 @@ void EnemyContoller::update()
 
 
 
-
+		// detects collition between bullets and the enemies
 		for (auto& b : bulletManager->bullets) 
 		{
 			SDL_Rect bulletRect = { b.x, b.y, 20, 20 }; // collision box of bullet
@@ -61,6 +62,15 @@ void EnemyContoller::update()
 				b.distance = 1001;
 				e.health -= 1;
 			}
+		}
+
+		// detects collition with the player 
+		SDL_Rect playerRect = { player->x, player->y, player->playerWidth, player->playerHeight };
+		SDL_Rect enemyRect = { e.x, e.y, 32, 32 };
+		SDL_Rect nullRect;
+		if (SDL_IntersectRect(&playerRect, &enemyRect, &nullRect)) {
+			player->health -= 1;
+			e.alive = false;
 		}
 	}
 
