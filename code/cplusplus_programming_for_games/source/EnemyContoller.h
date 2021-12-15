@@ -25,6 +25,8 @@ public:
 
 	void update();
 
+	void animationUpdate();
+
 	void render();
 
 	void clean();
@@ -39,7 +41,11 @@ private:
 	Player* player;
 
 
-
-
+	// used to create animation frames for the player
+	float animationTimer = 100.0f;
+	float lastAnimation = 0.0f;
+	// allow for the abity yo filp the texture of the player depending on which direction they are moving in
+	
+	int currentPlayerFrame = 0;
 };
 

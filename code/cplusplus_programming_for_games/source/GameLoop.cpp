@@ -91,7 +91,7 @@ bool GameLoop::processInput()
 		if (userInput.type == SDL_QUIT) {
 			return false;
 		}
-		// checks weather a key is down then makes it equal true
+		// checks whhhheather a key is down then makes it equal true
 		if (userInput.type == SDL_KEYDOWN) {
 			if (userInput.key.keysym.scancode < 512) {
 				keyDown[userInput.key.keysym.scancode] = true;

@@ -39,7 +39,7 @@ void Player::init()
 	SDL_FreeSurface(image3);
 
 	// importing the tile map
-	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/DungeonTilesetII.png");
+	SDL_Surface* image = IMG_Load("Assets/DungeonTileset/playerKnightAnimation.png");
 	if (image == nullptr){
 		std::cout << "Could not load image" << std::endl;
 		return;
@@ -141,22 +141,20 @@ void Player::animationUpdate()
 void Player::render()
 {
 
-	// render player 
-
+	// render player
 	SDL_Rect r = { x , y, (int)playerWidth, (int)playerHeight };
 
 	SDL_Rect sourceRect;
-	sourceRect.x = (currentPlayerFrame % 17) * playerSourceWidthPx;
-	sourceRect.y = (currentPlayerFrame / 17) * playerSourceHeightPx;
-	sourceRect.h = playerSourceHeightPx;
-	sourceRect.w = playerSourceWidthPx;
-
+	sourceRect.x = (currentPlayerFrame % 8) * playerSourceWidthPx;
+	sourceRect.y = 0;
+	sourceRect.h = 22;
+	sourceRect.w = 16;
 
 	SDL_Rect renderRect;
 	renderRect.x = x;
 	renderRect.y = y;
 	renderRect.h = (int)playerHeight;
-	renderRect.w = (int)playerWidth;	
+	renderRect.w = (int)playerWidth;
 	
 	if (flipPlayer) {
 		SDL_RenderCopyEx(renderer, playerTexture, &sourceRect, &renderRect, 0, NULL, SDL_FLIP_HORIZONTAL);
