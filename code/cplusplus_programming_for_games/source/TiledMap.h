@@ -47,7 +47,7 @@ public:
 	void render();
 
 	void clean();
-
+	std::array< std::array<int, 20>, 20 > tileMap;
 private:
 	int windowWidth = 0;
 	int windowHeight = 0;
@@ -64,10 +64,9 @@ private:
 	int locationY = 0;
 
 	int mapWidth = 20;
-	int mapHeight = 20;
+	int mapHeight = 20;	 
+	
 
-	 
-	std::array< std::array<int, 20>, 20 > tileMap;
 };
 
 

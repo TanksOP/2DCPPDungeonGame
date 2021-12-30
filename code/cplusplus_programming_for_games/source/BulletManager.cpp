@@ -1,10 +1,11 @@
 #include "BulletManager.h"
 
-BulletManager::BulletManager(SDL_Renderer* _renderer, Player* _player, TiledMap* _tiledMap)
+BulletManager::BulletManager(SDL_Renderer* _renderer, Player* _player, TiledMap* _tiledMap, SoundController* _soundController)
 {
 	renderer = _renderer;
 	player = _player;
 	tileMap = _tiledMap;
+	soundController = _soundController;
 	
 }
 
@@ -25,6 +26,7 @@ void BulletManager::CreateBullets(bool MouseLeftButton)
 			std::cout << testRotation << std::endl;
 			bullets.push_back(Bullet{ player->GetX() , player->GetY(), testRotation + (0.5f * 3.14159265f) ,0.0f });
 			lastShot = SDL_GetTicks();
+			soundController->PlaySound(Sounds::SHOOT);
 			//std::cout << "here" << std::endl;
 		}
 	}

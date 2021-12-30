@@ -61,6 +61,8 @@ int GameLoop::init()
 		keyDown[i] = false;
 	}
 
+	soundController = new SoundController();
+	soundController->PlaySound(Sounds::BACKGROUND);	
 	
 	fontRenderer = std::unique_ptr<FontRenderer>(new FontRenderer(renderer));
 	fontRenderer->init();
@@ -68,14 +70,19 @@ int GameLoop::init()
 	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "Assets/DungeonTileset/DungeonTilesetII.png", screenWidth, screenHeight));
 	tiledMap->init();
 
+	spikeTrap = new SpikeTrap(tiledMap.get());
+	spikeTrap->init();
+
 	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight);
 	player->init();
 
-	bm = new BulletManager(renderer, player, tiledMap.get());
+	bm = new BulletManager(renderer, player, tiledMap.get(), soundController);
 	bm->init();
 
-	ec = new EnemyContoller(renderer, bm, player, tiledMap.get());
+	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController);
 	ec->init();
+
+	
 
 
 
@@ -135,8 +142,10 @@ void GameLoop::update()
 	//if (score < 200000) {
 	//	score++;
 	//}
-	
 
+	// call music here
+	
+	spikeTrap->update();
 	tiledMap->update();
 	player->update();
 	bm->update();
@@ -169,6 +178,7 @@ void GameLoop::render()
 
 void GameLoop::clean()
 {
+	soundController->clean();
 	tiledMap->clean();
 	fontRenderer->clean();
 	player->clean();

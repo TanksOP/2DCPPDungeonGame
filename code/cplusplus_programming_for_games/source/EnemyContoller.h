@@ -3,16 +3,18 @@
 #include <SDL_image.h>
 #include <vector>
 #include <iostream>
+#include <string>
 #include "BulletManager.h"
 #include "Player.h"
 #include "AStarAlgorithum.h"
 #include "TiledMap.h"
+#include "SoundController.h"
 
 
 class EnemyContoller
 {
 public: 
-	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap);
+	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController);
 
 	struct Enemy
 	{
@@ -52,6 +54,7 @@ private:
 	BulletManager* bulletManager;
 	Player* player;
 	TiledMap* tiledMap;
+	SoundController* soundController;
 	
 
 

@@ -10,6 +10,8 @@
 #include "TiledMap.h"
 #include "BulletManager.h"
 #include "EnemyContoller.h"
+#include "SoundController.h"
+#include "SpikeTrap.h"
 
 
 class GameLoop
@@ -42,6 +44,8 @@ private:
 	BulletManager* bm = nullptr;
 	EnemyContoller* ec = nullptr;
 	Player* player = nullptr;
+	SoundController* soundController;
+	SpikeTrap* spikeTrap;
 	
 	int score = 0;
 	

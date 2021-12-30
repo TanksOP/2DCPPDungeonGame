@@ -1,11 +1,12 @@
 #include "EnemyContoller.h"
 
-EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap)
+EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController)
 {
 	renderer = _renderer;
 	bulletManager = _bulletManager;
 	player = _player;
 	tiledMap = _tiledMap;
+	soundController = _soundController;
 
 }
 
@@ -28,7 +29,7 @@ void EnemyContoller::createEnemy()
 	// code in here for future will be used to determin what enemy to create
 
 	// this is just a simple line of code for now that will be changed in the future to add more functionality 
-	/*enemys.push_back(Enemy{ float(rand() % 100), float(rand() % 900), true, 3, 3});*/
+	
 	int enemySpawnLocation = rand() % 4;
 	
 	// change this to a switcha and case
@@ -57,7 +58,7 @@ void EnemyContoller::update()
 		lastAnimation = SDL_GetTicks();
 	}
 
-	if (enemys.size() < 2) 
+	if (enemys.size() < 10) 
 	{
 		createEnemy();
 	}
@@ -147,6 +148,10 @@ void EnemyContoller::update()
 		if (SDL_IntersectRect(&playerRect, &enemyRect, &nullRect)) {
 			player->health -= 1;
 			e.alive = false;
+			
+			int oof = rand() % 2 + 1;
+			std::cout << oof << std::endl;
+			soundController->PlaySound(oof);
 		}
 	}
 

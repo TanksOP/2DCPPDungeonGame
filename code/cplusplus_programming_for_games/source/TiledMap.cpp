@@ -102,7 +102,6 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 void TiledMap::update()
 {
 	
-	tileMap[10][10] += 1;
 
 }
 
