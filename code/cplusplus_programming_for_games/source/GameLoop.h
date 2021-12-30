@@ -43,6 +43,8 @@ private:
 	EnemyContoller* ec = nullptr;
 	Player* player = nullptr;
 	
+	int score = 0;
+	
 
 };
 

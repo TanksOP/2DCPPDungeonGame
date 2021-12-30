@@ -1,9 +1,9 @@
 #include "GameLoop.h"
 
-const int screenWidth = 800;
-const int screenHeight = 600;
+const int screenWidth = 1200;
+const int screenHeight = 900;
 
-int score = 0;
+
 
 SDL_Window* window = nullptr;
 SDL_Surface* screenSurface = nullptr;
@@ -61,7 +61,7 @@ int GameLoop::init()
 		keyDown[i] = false;
 	}
 
-
+	
 	fontRenderer = std::unique_ptr<FontRenderer>(new FontRenderer(renderer));
 	fontRenderer->init();
 
@@ -74,7 +74,7 @@ int GameLoop::init()
 	bm = new BulletManager(renderer, player, tiledMap.get());
 	bm->init();
 
-	ec = new EnemyContoller(renderer, bm, player);
+	ec = new EnemyContoller(renderer, bm, player, tiledMap.get());
 	ec->init();
 
 
@@ -132,9 +132,9 @@ bool GameLoop::processInput()
 
 void GameLoop::update()
 {
-	if (score < 200000) {
-		score++;
-	}
+	//if (score < 200000) {
+	//	score++;
+	//}
 	
 
 	tiledMap->update();
@@ -152,10 +152,12 @@ void GameLoop::render()
 	bm->render();
 	ec->render();
 	
-
+	score = ec->getScore();
 	fontRenderer->render("Lives:", 32, 5, 75, 80 );
-	fontRenderer->render("Score", 475, 5, 75, 75);	
-	fontRenderer->render(std::to_string(score), 600, 200, 100, 100); 
+	fontRenderer->render("Score:", 325, 5, 75, 75);		
+	fontRenderer->render(std::to_string(score), 420, 15, 60, 60); 
+	fontRenderer->render("Enemies left:", 785, 5, 75, 140);
+	fontRenderer->render(std::to_string(score), 945, 15, 60, 60);
 
 	
 	player->render();

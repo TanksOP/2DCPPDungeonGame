@@ -6,8 +6,10 @@ Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth,
 	renderer = sdlRenderer;
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;
-	playerWidth = 0.05f * (float)windowWidth;
-	playerHeight = 0.1f * (float)windowHeight;	
+	/*playerWidth = 0.03f * (float)windowWidth;
+	playerHeight = 0.049f * (float)windowHeight;	*/
+	playerWidth = 45;
+	playerHeight = 45;
 }
 
 void Player::init()

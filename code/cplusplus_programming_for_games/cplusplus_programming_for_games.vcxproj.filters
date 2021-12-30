@@ -36,6 +36,9 @@
     <ClCompile Include="source\EnemyContoller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\AStarAlgorithum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Player.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\EnemyContoller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\AStarAlgorithum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

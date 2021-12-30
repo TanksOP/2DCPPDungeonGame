@@ -37,8 +37,8 @@ public:
 private:
 	
 	float playerSpeed = 0.1;
-	float x = 100;
-	float y = 100;
+	float x = 300;
+	float y = 300;
 	int health = 6;
 
 	int windowWidth = 0;

@@ -36,25 +36,25 @@ void BulletManager::update()
 {
 	for (auto& b : bullets) {
 		
-		if (tileMap->pathIsClear(b.x + sin(b.rotation) * bulletVelocity, b.y - cos(b.rotation) * bulletVelocity, 20, 20))
-		{
+		//if (tileMap->pathIsClear(b.x + sin(b.rotation) * bulletVelocity, b.y - cos(b.rotation) * bulletVelocity, 20, 20))
+		//{
 			b.x += sin(b.rotation) * bulletVelocity;
 			b.y -= cos(b.rotation) * bulletVelocity;
 			b.distance += bulletVelocity;
-		}
-		else {
-			b.distance = 1001;
+		//}
+		//else {
+			//b.distance = 1001;
 		
-		}
+		//}
 	}
 
 	auto remove = remove_if(bullets.begin(), bullets.end(),
 	[](const Bullet& b) {
 			return b.distance > 1000 ||
-		b.y < 1 ||
-		b.x < 1 ||
-		b.y > 579||
-		b.x > 779; });
+		b.y < 120 ||
+		b.x < 60 ||
+		b.y > 900 - 45||
+		b.x > 1200 - 60; });
 
 	// if distace > 1000 remove the bullet
 	bullets.erase(remove, bullets.end()); // removes etra spce still in the vector

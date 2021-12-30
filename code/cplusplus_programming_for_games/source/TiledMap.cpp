@@ -62,20 +62,37 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 	int Y3 = (y + _height) / (windowHeight / mapHeight);
 
 	
+	//// right side
+	//if (tileMap[X3][Y1] == 56 || tileMap[X3][Y2] == 56 ||  tileMap[X3][Y3] == 56) {
+	//	return false;
+	//}
+	////left side
+	//if (tileMap[X1][Y1] == 56 || tileMap[X1][Y2] == 56 || tileMap[X1][Y3] == 56) {
+	//	return false;
+	//}
+	////top side
+	//if (tileMap[X1][Y1] == 56 || tileMap[X2][Y1] == 56 || tileMap[X3][Y1] == 56) {
+	//	return false;
+	//}
+	//// bottom side
+	//if (tileMap[X1][Y3] == 56 || tileMap[X2][Y3] == 56 || tileMap[X3][Y3] == 56) {
+	//	return false;
+	//}
+
 	// right side
-	if (tileMap[X3][Y1] == 56 || tileMap[X3][Y2] == 56 ||  tileMap[X3][Y3] == 56) {
+	if (MAP_DATA[Y3][X1] == 1 || MAP_DATA[Y3][X2] == 1 || MAP_DATA[Y3][X3] == 1) {
 		return false;
 	}
 	//left side
-	if (tileMap[X1][Y1] == 56 || tileMap[X1][Y2] == 56 || tileMap[X1][Y3] == 56) {
+	if (MAP_DATA[Y1][X1] == 1 || MAP_DATA[Y1][X2] == 1 || MAP_DATA[Y1][X3] == 1) {
 		return false;
 	}
 	//top side
-	if (tileMap[X1][Y1] == 56 || tileMap[X2][Y1] == 56 || tileMap[X3][Y1] == 56) {
+	if (MAP_DATA[Y1][X1] == 1 || MAP_DATA[Y2][X1] == 1 || MAP_DATA[Y3][X1] == 1) {
 		return false;
 	}
 	// bottom side
-	if (tileMap[X1][Y3] == 56 || tileMap[X2][Y3] == 56 || tileMap[X3][Y3] == 56) {
+	if (MAP_DATA[Y1][X3] == 1 || MAP_DATA[Y2][X3] == 1 || MAP_DATA[Y3][X3] == 1) {
 		return false;
 	}
 
@@ -84,6 +101,8 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 
 void TiledMap::update()
 {
+	
+	tileMap[10][10] += 1;
 
 }
 

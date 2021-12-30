@@ -1,10 +1,11 @@
 #include "EnemyContoller.h"
 
-EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player)
+EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap)
 {
 	renderer = _renderer;
 	bulletManager = _bulletManager;
 	player = _player;
+	tiledMap = _tiledMap;
 
 }
 
@@ -27,8 +28,23 @@ void EnemyContoller::createEnemy()
 	// code in here for future will be used to determin what enemy to create
 
 	// this is just a simple line of code for now that will be changed in the future to add more functionality 
-	enemys.push_back(Enemy{ float(rand() % 100), float(rand() % 600), true, 3, 3});
-	std::cout << "Spawned an enemy" << std::endl;
+	/*enemys.push_back(Enemy{ float(rand() % 100), float(rand() % 900), true, 3, 3});*/
+	int enemySpawnLocation = rand() % 4;
+	
+	// change this to a switcha and case
+
+	if (enemySpawnLocation == 0) {
+		enemys.push_back(Enemy{ 1200 / 20 * 2, 900 / 20 * 4, true, 2, 2 });
+	}else if (enemySpawnLocation == 1) {
+		enemys.push_back(Enemy{ 1200 / 20 * 2, 900 / 20 * 18, true, 2, 2 });
+	}else if (enemySpawnLocation == 2) {
+		enemys.push_back(Enemy{ 1200 / 20 * 18, 900 / 20 * 4, true, 2, 2 });
+	}else if (enemySpawnLocation == 3) {
+		enemys.push_back(Enemy{ 1200 / 20 * 18, 900 / 20 * 18, true, 2, 2 });
+	}
+
+	//enemys.push_back(Enemy{ 1200/20*2, float(rand() % 400 + 101), true, 3, 3 });
+	//std::cout << "Spawned an enemy" << std::endl;
 
 }
 
@@ -41,36 +57,87 @@ void EnemyContoller::update()
 		lastAnimation = SDL_GetTicks();
 	}
 
-	if (enemys.size() < 5) 
+	if (enemys.size() < 2) 
 	{
 		createEnemy();
 	}
 
 	for (auto& e : enemys)
 	{
-		e.x += 0.02;
 
-		if (e.x > 800) {
-			e.alive = false;
+		// movement =--------------------
+
+
+		if (!e.EnemyMoving) {		
+			
+			e.enemy.x = e.x / 1200 * 20 ;
+			e.enemy.y = e.y / 900 * 20;
+			// creates a node point for where the desired destiation is
+			
+			// gets the player position
+			e.dest.x = (player->x + 0.5*player->playerWidth) / 1200 * 20;
+			e.dest.y = (player->y + 0.5*player->playerHeight) /900 * 20 ;
+			
+			// creates the path the ememy will take
+			e.path = aStar(tiledMap->MAP_DATA, e.enemy, e.dest);
+			if (e.path.size() > 1) {
+				e.EnemyMoving = true;
+			}
 		}
 
+		if (e.EnemyMoving)
+		{	
+
+			if (e.y / 900 * 20 < e.path[1].y - e.speed  )
+			{
+				e.y += e.speed;
+			}
+			else if (e.y / 900 * 20 > e.path[1].y + e.speed)
+			{
+				e.y -= e.speed;
+			}
+			else if (e.x / 1200 * 20 < e.path[1].x - e.speed )
+			{
+				e.x += e.speed;
+			}
+			else if (e.x / 1200 * 20  > e.path[1].x + e.speed  )
+			{
+				e.x -= e.speed;
+			}
+			else {
+					e.EnemyMoving = false;
+					e.x = e.path[1].x * 1200 / 20;
+					e.y = e.path[1].y * 900 / 20;
+				
+			}
+			
+		}
+
+
+
+		//------------------------------------------------
+		if (e.x > 1200) {
+			e.alive = false;
+		}
 		if (e.health <= 0)
 		{
 			e.alive = false;
+			score++;
 		}
-
-
 
 		// detects collition between bullets and the enemies
 		for (auto& b : bulletManager->bullets) 
 		{
-			SDL_Rect bulletRect = { b.x, b.y, 20, 20 }; // collision box of bullet
-			SDL_Rect enemyRect = { e.x, e.y, 32, 32 }; // collition box of meteor
-			SDL_Rect nullRect;
-			if (SDL_IntersectRect(&bulletRect, &enemyRect, &nullRect)) {
+			// circle collision
+			int diffX = b.x - e.x;
+			int diffY = b.y - e.y;
+			int vectorLength = sqrt(diffX * diffX + diffY * diffY);
+			if (vectorLength < (20 + 32)) {
 				b.distance = 1001;
 				e.health -= 1;
 			}
+
+
 		}
 
 		// detects collition with the player 
@@ -108,6 +175,11 @@ void EnemyContoller::animationUpdate()
 	
 }
 
+int EnemyContoller::getScore()
+{
+	return score;
+}
+
 void EnemyContoller::render()
 {
 	for (auto& e : enemys)
@@ -128,6 +200,8 @@ void EnemyContoller::render()
 		SDL_RenderCopy(renderer, enemyHealthTexture, 0, &healthBar);
 	}
 }
+
+
 
 void EnemyContoller::clean()
 {
