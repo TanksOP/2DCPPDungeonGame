@@ -5,7 +5,7 @@
 class SpikeTrap
 {
 public:
-	SpikeTrap(TiledMap* _tileMap);
+	SpikeTrap(TiledMap* _tileMap, int _windowWidth, int _windowHeight);
 
 	struct Spike {
 		
@@ -20,9 +20,15 @@ public:
 
 	void update();
 
+	bool ouchSpikes(float x, float y, float _width, float _height);
+
+	void clean();
+
 
 private:
 	TiledMap* tiledMap;
 	std::vector<Spike> spikes;
+	int windowWidth;
+	int windowHeight;
 };
 

@@ -70,7 +70,7 @@ int GameLoop::init()
 	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "Assets/DungeonTileset/DungeonTilesetII.png", screenWidth, screenHeight));
 	tiledMap->init();
 
-	spikeTrap = new SpikeTrap(tiledMap.get());
+	spikeTrap = new SpikeTrap(tiledMap.get(), screenWidth ,screenHeight);
 	spikeTrap->init();
 
 	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight);
@@ -79,7 +79,7 @@ int GameLoop::init()
 	bm = new BulletManager(renderer, player, tiledMap.get(), soundController);
 	bm->init();
 
-	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController);
+	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController, spikeTrap);
 	ec->init();
 
 	
@@ -162,11 +162,12 @@ void GameLoop::render()
 	ec->render();
 	
 	score = ec->getScore();
+	enemiesLeft = ec->getEnemiesleft();
 	fontRenderer->render("Lives:", 32, 5, 75, 80 );
 	fontRenderer->render("Score:", 325, 5, 75, 75);		
 	fontRenderer->render(std::to_string(score), 420, 15, 60, 60); 
 	fontRenderer->render("Enemies left:", 785, 5, 75, 140);
-	fontRenderer->render(std::to_string(score), 945, 15, 60, 60);
+	fontRenderer->render(std::to_string(enemiesLeft), 945, 15, 60, 60);
 
 	
 	player->render();

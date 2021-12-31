@@ -9,12 +9,13 @@
 #include "AStarAlgorithum.h"
 #include "TiledMap.h"
 #include "SoundController.h"
+#include "SpikeTrap.h"
 
 
 class EnemyContoller
 {
 public: 
-	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController);
+	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController, SpikeTrap* _spikeTrap);
 
 	struct Enemy
 	{
@@ -41,6 +42,8 @@ public:
 
 	int getScore();
 
+	int getEnemiesleft();
+
 	void render();
 
 	void clean();
@@ -55,6 +58,7 @@ private:
 	Player* player;
 	TiledMap* tiledMap;
 	SoundController* soundController;
+	SpikeTrap* spikeTrap;
 	
 
 
@@ -66,6 +70,7 @@ private:
 	int currentPlayerFrame = 0;
 
 	int score;
+	int enemiesLeft = 20;
 
 };
 

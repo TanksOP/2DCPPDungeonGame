@@ -1,12 +1,13 @@
 #include "EnemyContoller.h"
 
-EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController)
+EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController, SpikeTrap* _spikeTrap)
 {
 	renderer = _renderer;
 	bulletManager = _bulletManager;
 	player = _player;
 	tiledMap = _tiledMap;
 	soundController = _soundController;
+	spikeTrap = _spikeTrap;
 
 }
 
@@ -58,16 +59,21 @@ void EnemyContoller::update()
 		lastAnimation = SDL_GetTicks();
 	}
 
-	if (enemys.size() < 10) 
+	if (enemys.size()  < 10 && enemiesLeft >= 10) 
 	{
 		createEnemy();
 	}
+
+
 
 	for (auto& e : enemys)
 	{
 
 		// movement =--------------------
 
+		if (spikeTrap->ouchSpikes(e.x, e.y, 16, 20)) {
+			e.health--;
+		}
 
 		if (!e.EnemyMoving) {		
 			
@@ -124,6 +130,7 @@ void EnemyContoller::update()
 		{
 			e.alive = false;
 			score++;
+			enemiesLeft--;
 		}
 
 		// detects collition between bullets and the enemies
@@ -183,6 +190,11 @@ void EnemyContoller::animationUpdate()
 int EnemyContoller::getScore()
 {
 	return score;
+}
+
+int EnemyContoller::getEnemiesleft()
+{
+	return enemiesLeft;
 }
 
 void EnemyContoller::render()

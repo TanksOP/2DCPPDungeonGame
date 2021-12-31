@@ -41,7 +41,6 @@ public:
 	// player
 	bool pathIsClear(float x, float y, float _width, float _height);
 
-
 	void update();
 
 	void render();

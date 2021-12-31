@@ -48,6 +48,7 @@ private:
 	SpikeTrap* spikeTrap;
 	
 	int score = 0;
+	int enemiesLeft;
 	
 
 };
