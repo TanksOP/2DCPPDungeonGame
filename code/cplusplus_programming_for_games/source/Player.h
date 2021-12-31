@@ -3,12 +3,13 @@
 #include <SDL_image.h>
 #include <iostream>
 #include "TiledMap.h"
+#include"SpikeTrap.h"
 
 class Player
 {
 	friend class EnemyContoller;
 public:
-	Player(SDL_Renderer* sdlRenderer, TiledMap* _tileMap, int _windowWidth, int _windowHeight);
+	Player(SDL_Renderer* sdlRenderer, TiledMap* _tileMap, int _windowWidth, int _windowHeight, SpikeTrap* _spikeTrap);
 
 	void init();
 
@@ -68,6 +69,7 @@ private:
 	SDL_Texture* playerTexture = nullptr;
 
 	TiledMap* tileMap;
+	SpikeTrap* spikeTrap;
 
 	
 };

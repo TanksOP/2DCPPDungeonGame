@@ -1,11 +1,12 @@
 #include "Player.h"
 
-Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth, int _windowHeight)
+Player::Player(SDL_Renderer* sdlRenderer, TiledMap* _tiledMap, int _windowWidth, int _windowHeight, SpikeTrap* _spikeTrap)
 {
 	tileMap = _tiledMap;
 	renderer = sdlRenderer;
 	windowHeight = _windowHeight;
 	windowWidth = _windowWidth;
+	spikeTrap = _spikeTrap;
 	/*playerWidth = 0.03f * (float)windowWidth;
 	playerHeight = 0.049f * (float)windowHeight;	*/
 	playerWidth = 45;
@@ -117,12 +118,14 @@ void Player::processInput(bool* keyDown)
 
 void Player::update()
 {
+	if (spikeTrap->ouchSpikes(x, y, 16, 20)) {
+		health--;
+	}
 	// creating animation frames so that every 200 ms is a new frame
 	if (SDL_GetTicks() - lastAnimation > animationTimer) {
 		animationUpdate();
 
-		lastAnimation = SDL_GetTicks();
-		
+		lastAnimation = SDL_GetTicks();		
 	}
 }
 

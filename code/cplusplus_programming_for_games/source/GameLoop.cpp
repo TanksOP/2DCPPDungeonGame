@@ -73,7 +73,7 @@ int GameLoop::init()
 	spikeTrap = new SpikeTrap(tiledMap.get(), screenWidth ,screenHeight);
 	spikeTrap->init();
 
-	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight);
+	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight, spikeTrap);
 	player->init();
 
 	bm = new BulletManager(renderer, player, tiledMap.get(), soundController);

@@ -46,7 +46,7 @@ void EnemyContoller::createEnemy()
 	}
 
 	//enemys.push_back(Enemy{ 1200/20*2, float(rand() % 400 + 101), true, 3, 3 });
-	//std::cout << "Spawned an enemy" << std::endl;
+	std::cout << "Spawned an enemy" << std::endl;
 
 }
 
@@ -59,7 +59,7 @@ void EnemyContoller::update()
 		lastAnimation = SDL_GetTicks();
 	}
 
-	if (enemys.size()  < 10 && enemiesLeft >= 10) 
+	if (enemys.size()  < 1 ) 
 	{
 		createEnemy();
 	}
@@ -71,7 +71,7 @@ void EnemyContoller::update()
 
 		// movement =--------------------
 
-		if (spikeTrap->ouchSpikes(e.x, e.y, 16, 20)) {
+		if (spikeTrap->ouchSpikes(e.x , e.y , 16, 20)) {
 			e.health--;
 		}
 
