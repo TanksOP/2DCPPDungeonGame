@@ -118,8 +118,9 @@ void Player::processInput(bool* keyDown)
 
 void Player::update()
 {
-	if (spikeTrap->ouchSpikes(x, y, 16, 20)) {
+	if (spikeTrap->ouchSpikes(x + 8, y + 11, 16, 20)) {
 		health--;
+		
 	}
 	// creating animation frames so that every 200 ms is a new frame
 	if (SDL_GetTicks() - lastAnimation > animationTimer) {

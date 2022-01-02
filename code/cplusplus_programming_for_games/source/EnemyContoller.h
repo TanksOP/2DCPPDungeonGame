@@ -28,8 +28,6 @@ public:
 		float speed = 1.f / 40.f;
 		Node enemy;
 		Node dest;
-
-
 	};
 
 	void init();

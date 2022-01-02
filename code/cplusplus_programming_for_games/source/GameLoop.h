@@ -12,6 +12,8 @@
 #include "EnemyContoller.h"
 #include "SoundController.h"
 #include "SpikeTrap.h"
+#include "Particles.h"
+
 
 
 class GameLoop
@@ -46,7 +48,8 @@ private:
 	Player* player = nullptr;
 	SoundController* soundController;
 	SpikeTrap* spikeTrap;
-	
+	Particles* particle;
+
 	int score = 0;
 	int enemiesLeft;
 	

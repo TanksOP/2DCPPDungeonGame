@@ -61,6 +61,8 @@ int GameLoop::init()
 		keyDown[i] = false;
 	}
 
+	particle = new Particles(renderer);
+	particle->init();
 	soundController = new SoundController();
 	soundController->PlaySound(Sounds::BACKGROUND);	
 	
@@ -150,6 +152,7 @@ void GameLoop::update()
 	player->update();
 	bm->update();
 	ec->update();
+	particle->Update();
 	
 }
 
@@ -172,6 +175,8 @@ void GameLoop::render()
 	
 	player->render();
 
+	particle->Render();
+
 	SDL_RenderPresent(renderer);
 
 	//SDL_Delay(16);
@@ -185,6 +190,7 @@ void GameLoop::clean()
 	player->clean();
 	bm->clean();
 	ec->clean();
+	particle->clean();
 	
 	delete player;
 	SDL_DestroyWindow(window);

@@ -59,7 +59,7 @@ void EnemyContoller::update()
 		lastAnimation = SDL_GetTicks();
 	}
 
-	if (enemys.size()  < 1 ) 
+	if (enemys.size()  < 5 && enemys.size() < enemiesLeft) 
 	{
 		createEnemy();
 	}
