@@ -62,6 +62,11 @@ void BulletManager::update()
 	bullets.erase(remove, bullets.end()); // removes etra spce still in the vector
 }
 
+void BulletManager::Reset()
+{
+	bullets.clear();
+}
+
 
 void BulletManager::render()
 {

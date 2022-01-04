@@ -86,7 +86,7 @@ int GameLoop::init()
 	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController, spikeTrap, particle);
 	ec->init();
 
-	menus = new Menus(fontRenderer.get(), renderer, player, ec, spikeTrap);
+	menus = new Menus(fontRenderer.get(), renderer, player, ec, spikeTrap, particle, bm);
 
 
 
@@ -107,6 +107,16 @@ bool GameLoop::processInput()
 			if (userInput.key.keysym.scancode < 512) {
 				keyDown[userInput.key.keysym.scancode] = true;
 			}
+			if (userInput.key.keysym.sym == SDLK_p && !mainMenu && !ggScreen && !winScreen) {
+				if (pauseMenu) {
+					pauseMenu = false;
+				}
+				else {
+					pauseMenu = true;
+				}
+				
+				
+			}
 
 		}
 		// checks weather a key is up then makes it equal false
@@ -119,8 +129,8 @@ bool GameLoop::processInput()
 		else if (userInput.type == SDL_MOUSEBUTTONDOWN) {
 			if (userInput.button.button == SDL_BUTTON_LEFT) {
 				// mouse is clicked and on a menu call input function inside the menus class
-				if (mainMenu || pauseMenu || ggScreen) {
-					menus->Input(mainMenu, ggScreen, pauseMenu, level);
+				if (mainMenu || pauseMenu || ggScreen || winScreen) {
+					menus->Input(mainMenu, ggScreen, pauseMenu, level, winScreen);
 				}
 				MouseLeftButton = true;
 				//bm->CreateBullets(MouseLeftButton, userInput.motion.x, userInput.motion.y);
@@ -135,7 +145,7 @@ bool GameLoop::processInput()
 	}
 
 
-	if (!mainMenu&&!pauseMenu&&!ggScreen) {
+	if (!mainMenu&&!pauseMenu&&!ggScreen&&!winScreen) {
 		player->processInput(keyDown);
 		bm->CreateBullets(MouseLeftButton);
 	}	
@@ -150,7 +160,8 @@ void GameLoop::update()
 
 	// when main menu is true display the main menu and dont display the game 
 	
-	if(!mainMenu && ! pauseMenu && !ggScreen) {
+	if(!mainMenu && ! pauseMenu && !ggScreen && !winScreen) {
+
 		particle->Update();
 		spikeTrap->update();
 		player->update();
@@ -159,6 +170,10 @@ void GameLoop::update()
 		tiledMap->update(level);
 		if (player->GetLives() <= 0) {
 			ggScreen = true;
+		}
+
+		if (ec->getEnemiesleft() <= 0 && (player->GetX() > 540 && player->GetX() < 660) && player->GetY() < 120) {
+			winScreen = true;
 		}
 	}
 
@@ -171,18 +186,25 @@ void GameLoop::render()
 {
 
 	if (mainMenu) {
-		menus->Render(mainMenu, ggScreen, pauseMenu);
+		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
 	}
 	else if (ggScreen) {
-		menus->Render(mainMenu, ggScreen, pauseMenu);
+		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
 	}
-	else if (!mainMenu && !ggScreen) {
+	else if (winScreen) {
+		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
+	}
+	else if (pauseMenu) {
+		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
+	}
+	else if (!mainMenu && !ggScreen && !winScreen) {
 		SDL_RenderClear(renderer);
 		tiledMap->render();
 		bm->render();
 		ec->render();
 		score = ec->getScore();
 		enemiesLeft = ec->getEnemiesleft();
+		fontRenderer->render("Lives:", 32, 5, 75, 80);
 		fontRenderer->render("Lives:", 32, 5, 75, 80);
 		fontRenderer->render("Score:", 325, 5, 75, 75);
 		fontRenderer->render(std::to_string(score), 420, 15, 60, 60);

@@ -26,6 +26,11 @@ void Particles::createBloodSplatter(float x, float y)
 	
 }
 
+void Particles::Reset()
+{
+	particlePositions.clear();
+}
+
 void Particles::Update()
 {
 	 /*creaete anew particle*/

@@ -29,6 +29,8 @@ public:
 
 	void update();
 
+	void Reset();
+
 	void render();
 
 	void clean();

@@ -7,11 +7,11 @@ class Menus
 {
 public:
 
-	Menus(FontRenderer* _fontRenderer, SDL_Renderer* _renderer, Player* _player, EnemyContoller* _enemyController, SpikeTrap* _spikeTrap);
+	Menus(FontRenderer* _fontRenderer, SDL_Renderer* _renderer, Player* _player, EnemyContoller* _enemyController, SpikeTrap* _spikeTrap, Particles* _particles, BulletManager* _bulletManager);
 
-	void Render(bool &mainMenu, bool &ggScreen, bool &pauseMenu);
+	void Render(bool &mainMenu, bool &ggScreen, bool &pauseMenu, bool& winScreen);
 
-	void Input(bool& mainMenu, bool& ggScreen, bool& pauseMenu, float& level);
+	void Input(bool& mainMenu, bool& ggScreen, bool& pauseMenu, float& level, bool& winScreen);
 
 
 private:
@@ -20,6 +20,8 @@ private:
 	Player* player;
 	EnemyContoller* enemyController;
 	SpikeTrap* spikeTrap;
+	Particles* particles;
+	BulletManager* bulletManager;
 
 	int mouseX, mouseY;
 	

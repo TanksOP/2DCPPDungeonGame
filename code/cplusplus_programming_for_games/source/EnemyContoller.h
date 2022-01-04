@@ -80,7 +80,7 @@ private:
 	int currentPlayerFrame = 0;
 
 	int score;
-	int enemiesLeft = 20;
+	int enemiesLeft;
 
 };
 

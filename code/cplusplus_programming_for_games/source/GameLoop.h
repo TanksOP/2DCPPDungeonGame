@@ -40,7 +40,7 @@ private:
 	bool keyDown[512];
 	bool MouseLeftButton = false;
 
-	bool mainMenu = true, ggScreen = false, pauseMenu = false;
+	bool mainMenu = true, ggScreen = false, pauseMenu = false, winScreen = false;
 
 
 	std::unique_ptr<FontRenderer> fontRenderer;

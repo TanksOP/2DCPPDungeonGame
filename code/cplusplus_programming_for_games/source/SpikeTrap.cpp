@@ -9,17 +9,7 @@ SpikeTrap::SpikeTrap(TiledMap* _tileMap, int _windowWidth, int _windowHeight)
 
 void SpikeTrap::init()
 {
-	//78
-	/*for (int i = 0; i < 20; ++i)
-	{
-		for (int j = 0; j < 20; ++j)
-		{
-			if (tiledMap->tileMap[j][i] == 78) {
-				spikes.push_back(Spike{ j, i, 78, 10000, -15000, false });
-			}
-		}
-	}*/
-
+	
 }
 
 void SpikeTrap::spikeAnimation()
@@ -86,7 +76,7 @@ void SpikeTrap::createSpikes()
 	{
 		for (int j = 0; j < 20; ++j)
 		{
-			if (tiledMap->tileMap[j][i] == 78) {
+			if (tiledMap->tileMap[j][i] == 78|| tiledMap->tileMap[j][i] == 79|| tiledMap->tileMap[j][i] == 81) {
 				spikes.push_back(Spike{ j, i, 78, 10000, -15000, false });
 			}
 		}

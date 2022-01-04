@@ -19,6 +19,8 @@ public:
 
 	void createBloodSplatter(float x, float y);
 
+	void Reset();
+
 	void Update();
 
 	void Render();
