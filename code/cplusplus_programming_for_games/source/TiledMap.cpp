@@ -14,7 +14,7 @@ int TiledMap::init()
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
 
-	/*std::ifstream fileIn1("Assets/tileMaps/map2.txt"); 
+	std::ifstream fileIn1("Assets/tileMaps/map2.txt"); 
 	if (fileIn1.is_open())
 	{
 
@@ -44,7 +44,8 @@ int TiledMap::init()
 			}
 		}
 	}
-	fileIn2.close();*/
+	fileIn2.close();
+
 	return 0;
 
 }
@@ -96,62 +97,6 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 	return true;
 }
 
-void TiledMap::changeMap(int level)
-{
-	if (level == 1) {	
-		
-		std::ifstream fileIn1("Assets/tileMaps/map2.txt");
-		if (fileIn1.is_open())
-		{
-
-			for (int i = 0; i < 20; ++i)
-			{
-				for (int j = 0; j < 20; ++j)
-				{
-					std::string tile;
-					fileIn1 >> tile;
-					tileMap[j][i] = std::stoi(tile);
-				}
-			}
-		}
-		fileIn1.close();
-
-		std::ifstream fileIn2("Assets/tileMaps/collisionMap1.txt");
-		if (fileIn2.is_open())
-		{
-			for (int i = 0; i < 20; ++i)
-			{
-				for (int j = 0; j < 20; ++j)
-				{
-					std::string tile;
-					fileIn2 >> tile;
-					collitionMap[j][i] = std::stoi(tile);
-				}
-			}
-		}
-		fileIn2.close();
-	}
-
-	else if (level == 2) {
-
-		std::ifstream fileIn3("Assets/tileMaps/level2map.txt");
-		if (fileIn3.is_open())
-		{
-
-			for (int i = 0; i < 20; ++i)
-			{
-				for (int j = 0; j < 20; ++j)
-				{
-					std::string tile;
-					fileIn3 >> tile;
-					tileMap[j][i] = std::stoi(tile);
-				}
-			}
-		}
-		fileIn3.close();
-	}
-}
-
 void TiledMap::update(float& level)
 {
 	if (level == 1.5f) {
@@ -192,7 +137,6 @@ void TiledMap::render()
 
 			SDL_RenderCopy(renderer, texture, &sourceRect, &renderRect);
 		}
-		
 	}
 }
 

@@ -49,7 +49,6 @@ void Menus::Input(bool& mainMenu, bool& ggScreen, bool& pauseMenu, float&level)
 			player->ResetHealth();
 			player->ResetPlayerPostition();
 			spikeTrap->reset();
-			
 			spikeTrap->createSpikes();
 
 		}
