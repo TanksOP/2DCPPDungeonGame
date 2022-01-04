@@ -72,6 +72,7 @@ int GameLoop::init()
 
 	tiledMap = std::unique_ptr<TiledMap>(new TiledMap(renderer, "Assets/DungeonTileset/DungeonTilesetII.png", screenWidth, screenHeight));
 	tiledMap->init();
+	tiledMap->changeMap(1);
 
 	spikeTrap = new SpikeTrap(tiledMap.get(), screenWidth ,screenHeight);
 	//spikeTrap->init();
@@ -94,9 +95,7 @@ int GameLoop::init()
 }
 
 bool GameLoop::processInput()
-{
-
-	
+{	
 	SDL_Event userInput;
 	while (SDL_PollEvent(&userInput)) {
 		if (userInput.type == SDL_QUIT) {

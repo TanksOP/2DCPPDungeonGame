@@ -131,6 +131,8 @@ void Player::update()
 
 		lastAnimation = SDL_GetTicks();		
 	}
+
+
 }
 
 void Player::animationUpdate()
