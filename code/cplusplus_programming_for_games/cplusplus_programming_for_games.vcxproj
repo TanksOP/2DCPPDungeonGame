@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Menus.cpp" />
     <ClCompile Include="source\Particles.cpp" />
     <ClCompile Include="source\SoundController.cpp" />
     <ClCompile Include="source\AStarAlgorithum.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="source\SpikeTrap.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Menus.h" />
     <ClInclude Include="source\Particles.h" />
     <ClInclude Include="source\SoundController.h" />
     <ClInclude Include="source\AStarAlgorithum.h" />

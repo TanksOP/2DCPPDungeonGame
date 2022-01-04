@@ -52,6 +52,7 @@ int GameLoop::init()
 		std::cout << SDL_GetError() << std::endl;
 		return -1;
 	}
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
 	// sets the game to full screen
 	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
@@ -73,18 +74,19 @@ int GameLoop::init()
 	tiledMap->init();
 
 	spikeTrap = new SpikeTrap(tiledMap.get(), screenWidth ,screenHeight);
-	spikeTrap->init();
+	//spikeTrap->init();
+	spikeTrap->createSpikes();
 
-	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight, spikeTrap);
+	player = new Player(renderer, tiledMap.get(), screenWidth, screenHeight, spikeTrap, soundController);
 	player->init();
 
 	bm = new BulletManager(renderer, player, tiledMap.get(), soundController);
 	bm->init();
 
-	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController, spikeTrap);
+	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController, spikeTrap, particle);
 	ec->init();
 
-	
+	menus = new Menus(fontRenderer.get(), renderer, player, ec, spikeTrap);
 
 
 
@@ -116,6 +118,10 @@ bool GameLoop::processInput()
 
 		else if (userInput.type == SDL_MOUSEBUTTONDOWN) {
 			if (userInput.button.button == SDL_BUTTON_LEFT) {
+				// mouse is clicked and on a menu call input function inside the menus class
+				if (mainMenu || pauseMenu || ggScreen) {
+					menus->Input(mainMenu, ggScreen, pauseMenu, level);
+				}
 				MouseLeftButton = true;
 				//bm->CreateBullets(MouseLeftButton, userInput.motion.x, userInput.motion.y);
 			}
@@ -128,11 +134,11 @@ bool GameLoop::processInput()
 		}
 	}
 
-	player->processInput(keyDown);
-	
 
-	bm->CreateBullets(MouseLeftButton);
-	
+	if (!mainMenu&&!pauseMenu&&!ggScreen) {
+		player->processInput(keyDown);
+		bm->CreateBullets(MouseLeftButton);
+	}	
 	
 
 	return true;
@@ -141,42 +147,53 @@ bool GameLoop::processInput()
 
 void GameLoop::update()
 {
-	//if (score < 200000) {
-	//	score++;
-	//}
 
-	// call music here
+	// when main menu is true display the main menu and dont display the game 
 	
-	spikeTrap->update();
-	tiledMap->update();
-	player->update();
-	bm->update();
-	ec->update();
-	particle->Update();
+	if(!mainMenu && ! pauseMenu && !ggScreen) {
+		particle->Update();
+		spikeTrap->update();
+		player->update();
+		bm->update();
+		ec->update(level);
+		tiledMap->update(level);
+		if (player->GetLives() <= 0) {
+			ggScreen = true;
+		}
+	}
+
+	
+
 	
 }
 
 void GameLoop::render()
 {
-	SDL_RenderClear(renderer);	
 
-	tiledMap->render();
-	bm->render();
-	ec->render();
+	if (mainMenu) {
+		menus->Render(mainMenu, ggScreen, pauseMenu);
+	}
+	else if (ggScreen) {
+		menus->Render(mainMenu, ggScreen, pauseMenu);
+	}
+	else if (!mainMenu && !ggScreen) {
+		SDL_RenderClear(renderer);
+		tiledMap->render();
+		bm->render();
+		ec->render();
+		score = ec->getScore();
+		enemiesLeft = ec->getEnemiesleft();
+		fontRenderer->render("Lives:", 32, 5, 75, 80);
+		fontRenderer->render("Score:", 325, 5, 75, 75);
+		fontRenderer->render(std::to_string(score), 420, 15, 60, 60);
+		fontRenderer->render("Enemies left:", 785, 5, 75, 140);
+		fontRenderer->render(std::to_string(enemiesLeft), 945, 15, 60, 60);
+		player->render();
+		particle->Render();
+	}
 	
-	score = ec->getScore();
-	enemiesLeft = ec->getEnemiesleft();
-	fontRenderer->render("Lives:", 32, 5, 75, 80 );
-	fontRenderer->render("Score:", 325, 5, 75, 75);		
-	fontRenderer->render(std::to_string(score), 420, 15, 60, 60); 
-	fontRenderer->render("Enemies left:", 785, 5, 75, 140);
-	fontRenderer->render(std::to_string(enemiesLeft), 945, 15, 60, 60);
 
 	
-	player->render();
-
-	particle->Render();
-
 	SDL_RenderPresent(renderer);
 
 	//SDL_Delay(16);

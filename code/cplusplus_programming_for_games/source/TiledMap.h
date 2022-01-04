@@ -10,8 +10,9 @@
 
 class TiledMap
 {
+	
 public: 
-	const int MAP_DATA[20][20] = {
+	 const int MAP_DATA[20][20] = {
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
 		{ 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
@@ -41,13 +42,19 @@ public:
 	// player
 	bool pathIsClear(float x, float y, float _width, float _height);
 
-	void update();
+	void update(float &level);
 
 	void render();
 
 	void clean();
+
 	std::array< std::array<int, 20>, 20 > tileMap;
+
+	int collitionMap [20][20];
+	
 private:
+	
+	
 	int windowWidth = 0;
 	int windowHeight = 0;
 	const int sourceTileSizePx = 16;

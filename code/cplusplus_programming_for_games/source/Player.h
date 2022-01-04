@@ -4,12 +4,13 @@
 #include <iostream>
 #include "TiledMap.h"
 #include"SpikeTrap.h"
+#include "SoundController.h"
 
 class Player
 {
 	friend class EnemyContoller;
 public:
-	Player(SDL_Renderer* sdlRenderer, TiledMap* _tileMap, int _windowWidth, int _windowHeight, SpikeTrap* _spikeTrap);
+	Player(SDL_Renderer* sdlRenderer, TiledMap* _tileMap, int _windowWidth, int _windowHeight, SpikeTrap* _spikeTrap, SoundController* _sound);
 
 	void init();
 
@@ -29,6 +30,19 @@ public:
 
 	float GetY() {
 		return y + (playerHeight/2);
+	}
+
+	int GetLives() {
+		return health;
+	}
+
+	void ResetHealth() {
+		health = 6;
+	}
+
+	void ResetPlayerPostition() {
+		x = 300;
+		y = 300;
 	}
 	
 	void clean();
@@ -70,6 +84,7 @@ private:
 
 	TiledMap* tileMap;
 	SpikeTrap* spikeTrap;
+	SoundController* sound;
 
 	
 };

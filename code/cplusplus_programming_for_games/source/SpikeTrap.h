@@ -4,6 +4,8 @@
 
 class SpikeTrap
 {
+
+
 public:
 	SpikeTrap(TiledMap* _tileMap, int _windowWidth, int _windowHeight);
 
@@ -21,6 +23,12 @@ public:
 	void update();
 
 	bool ouchSpikes(float x, float y, float _width, float _height);
+
+	void createSpikes();
+
+	void reset() {
+		spikes.clear();
+	}
 
 	void clean();
 

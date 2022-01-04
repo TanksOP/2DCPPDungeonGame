@@ -14,8 +14,8 @@ int TiledMap::init()
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
 
-	std::ifstream fileIn("Assets/tileMaps/map2.txt"); 
-	if (fileIn.is_open())
+	std::ifstream fileIn1("Assets/tileMaps/map2.txt"); 
+	if (fileIn1.is_open())
 	{
 
 		for (int i = 0; i < 20; ++i)
@@ -23,13 +23,28 @@ int TiledMap::init()
 			for (int j = 0; j < 20; ++j)
 			{
 				std::string tile;
-				fileIn >> tile;
+				fileIn1 >> tile;
 				tileMap[j][i] = std::stoi(tile);
 			}
 		}
 	}
+	fileIn1.close();
 
-	fileIn.close();
+	std::ifstream fileIn2("Assets/tileMaps/collisionMap1.txt");
+	if (fileIn2.is_open())
+	{
+
+		for (int i = 0; i < 20; ++i)
+		{
+			for (int j = 0; j < 20; ++j)
+			{
+				std::string tile;
+				fileIn2 >> tile;
+				collitionMap[j][i] = std::stoi(tile);
+			}
+		}
+	}
+	fileIn2.close();
 
 	return 0;
 
@@ -61,48 +76,40 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 	int Y2 = (y + 0.5 * _height) / (windowHeight / mapHeight);
 	int Y3 = (y + _height) / (windowHeight / mapHeight);
 
-	
-	//// right side
-	//if (tileMap[X3][Y1] == 56 || tileMap[X3][Y2] == 56 ||  tileMap[X3][Y3] == 56) {
-	//	return false;
-	//}
-	////left side
-	//if (tileMap[X1][Y1] == 56 || tileMap[X1][Y2] == 56 || tileMap[X1][Y3] == 56) {
-	//	return false;
-	//}
-	////top side
-	//if (tileMap[X1][Y1] == 56 || tileMap[X2][Y1] == 56 || tileMap[X3][Y1] == 56) {
-	//	return false;
-	//}
-	//// bottom side
-	//if (tileMap[X1][Y3] == 56 || tileMap[X2][Y3] == 56 || tileMap[X3][Y3] == 56) {
-	//	return false;
-	//}
 
 	// right side
-	if (MAP_DATA[Y3][X1] == 1 || MAP_DATA[Y3][X2] == 1 || MAP_DATA[Y3][X3] == 1) {
+	if (collitionMap[X1][Y3] == 1 || collitionMap[X2][Y3] == 1 || collitionMap[X3][Y3] == 1) {
 		return false;
 	}
 	//left side
-	if (MAP_DATA[Y1][X1] == 1 || MAP_DATA[Y1][X2] == 1 || MAP_DATA[Y1][X3] == 1) {
+	if (collitionMap[X1][Y1] == 1 || collitionMap[X2][Y1] == 1 || collitionMap[X3][Y1] == 1) {
 		return false;
 	}
 	//top side
-	if (MAP_DATA[Y1][X1] == 1 || MAP_DATA[Y2][X1] == 1 || MAP_DATA[Y3][X1] == 1) {
+	if (collitionMap[X1][Y1] == 1 || collitionMap[X1][Y2] == 1 || collitionMap[X1][Y3] == 1) {
 		return false;
 	}
 	// bottom side
-	if (MAP_DATA[Y1][X3] == 1 || MAP_DATA[Y2][X3] == 1 || MAP_DATA[Y3][X3] == 1) {
+	if (collitionMap[X3][Y1] == 1 || collitionMap[X3][Y2] == 1 || collitionMap[X3][Y3] == 1) {
 		return false;
 	}
 
 	return true;
 }
 
-void TiledMap::update()
+void TiledMap::update(float& level)
 {
-	
+	if (level == 1.5f) {
+		tileMap[9][2] = 103;
+		tileMap[10][2] = 104;
+		tileMap[9][3] = 110;
+		tileMap[10][3] = 111;
 
+		collitionMap[9][2] = 0;
+		collitionMap[10][2] = 0;
+		collitionMap[9][3] = 0;
+		collitionMap[10][3] = 0;
+	}
 }
 
 

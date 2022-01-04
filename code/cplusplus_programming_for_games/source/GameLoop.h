@@ -13,6 +13,7 @@
 #include "SoundController.h"
 #include "SpikeTrap.h"
 #include "Particles.h"
+#include "Menus.h"
 
 
 
@@ -39,6 +40,8 @@ private:
 	bool keyDown[512];
 	bool MouseLeftButton = false;
 
+	bool mainMenu = true, ggScreen = false, pauseMenu = false;
+
 
 	std::unique_ptr<FontRenderer> fontRenderer;
 	std::unique_ptr<TiledMap> tiledMap;
@@ -49,10 +52,12 @@ private:
 	SoundController* soundController;
 	SpikeTrap* spikeTrap;
 	Particles* particle;
+	Menus* menus;
 
 	int score = 0;
 	int enemiesLeft;
+	float level = 1;
 	
-
+	
 };
 

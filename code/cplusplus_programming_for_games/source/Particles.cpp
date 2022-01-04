@@ -29,14 +29,14 @@ void Particles::createBloodSplatter(float x, float y)
 void Particles::Update()
 {
 	 /*creaete anew particle*/
-	if (SDL_GetTicks() - lastParticleSpawn >= nextParticleSpawn) {
-		lastParticleSpawn = SDL_GetTicks();
-		nextParticleSpawn = emissionRate + (rand() % emmissionRange);
+	//if (SDL_GetTicks() - lastParticleSpawn >= nextParticleSpawn) {
+	//	lastParticleSpawn = SDL_GetTicks();
+	//	nextParticleSpawn = emissionRate + (rand() % emmissionRange);
 
-		// x, y, w, h, vely, velx
-		particlePositions.push_back(Particle{ 200.f, 200.f, float(rand() % 6 + 2), float(rand() % 6 + 2), -0.1f, float(rand() % 201 - 100) / 3300 , 0 });
-		
-	}
+	//	// x, y, w, h, vely, velx
+	//	particlePositions.push_back(Particle{ 200.f, 200.f, float(rand() % 6 + 2), float(rand() % 6 + 2), -0.1f, float(rand() % 201 - 100) / 3300 , 0 });
+	//	
+	//}
 	for (auto& particle : particlePositions) {
 
 		//particle.VelX = 0.03;

@@ -1,6 +1,6 @@
 #include "EnemyContoller.h"
 
-EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController, SpikeTrap* _spikeTrap)
+EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController, SpikeTrap* _spikeTrap, Particles* _particle)
 {
 	renderer = _renderer;
 	bulletManager = _bulletManager;
@@ -8,6 +8,7 @@ EnemyContoller::EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletMa
 	tiledMap = _tiledMap;
 	soundController = _soundController;
 	spikeTrap = _spikeTrap;
+	particles = _particle;
 
 }
 
@@ -50,7 +51,7 @@ void EnemyContoller::createEnemy()
 
 }
 
-void EnemyContoller::update()
+void EnemyContoller::update(float &level)
 {
 	// creating animation frames so that every 200 ms is a new frame
 	if (SDL_GetTicks() - lastAnimation > animationTimer) {
@@ -64,6 +65,10 @@ void EnemyContoller::update()
 		createEnemy();
 	}
 
+	if (enemiesLeft <= 0) {
+		level = 1.5f;
+	}
+
 
 
 	for (auto& e : enemys)
@@ -73,6 +78,7 @@ void EnemyContoller::update()
 
 		if (spikeTrap->ouchSpikes(e.x , e.y , 16, 20)) {
 			e.health--;
+			particles->createBloodSplatter(e.x + 16, e.y + 20);
 		}
 
 		if (!e.EnemyMoving) {		
@@ -84,6 +90,7 @@ void EnemyContoller::update()
 			// gets the player position
 			e.dest.x = (player->x + 0.5*player->playerWidth) / 1200 * 20;
 			e.dest.y = (player->y + 0.5*player->playerHeight) /900 * 20 ;
+			
 			
 			// creates the path the ememy will take
 			e.path = aStar(tiledMap->MAP_DATA, e.enemy, e.dest);
@@ -143,6 +150,7 @@ void EnemyContoller::update()
 			if (vectorLength < (20 + 32)) {
 				b.distance = 1001;
 				e.health -= 1;
+				particles->createBloodSplatter(e.x + 16, e.y + 20);
 			}
 
 

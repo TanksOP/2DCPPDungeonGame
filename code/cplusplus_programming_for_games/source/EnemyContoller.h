@@ -10,12 +10,14 @@
 #include "TiledMap.h"
 #include "SoundController.h"
 #include "SpikeTrap.h"
+#include "Particles.h"
 
 
 class EnemyContoller
 {
+	friend class TiledMap;
 public: 
-	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController, SpikeTrap* _spikeTrap);
+	EnemyContoller(SDL_Renderer* _renderer, BulletManager* _bulletManager, Player* _player, TiledMap* _tiledMap, SoundController* _soundController, SpikeTrap* _spikeTrap, Particles* _particle);
 
 	struct Enemy
 	{
@@ -34,7 +36,7 @@ public:
 
 	void createEnemy();
 
-	void update();
+	void update(float& level);
 
 	void animationUpdate();
 
@@ -43,6 +45,15 @@ public:
 	int getEnemiesleft();
 
 	void render();
+
+	void Reset() {
+		score = 0;
+		enemiesLeft = 20;
+		for (auto& e : enemys)
+		{
+			e.alive = false;
+		}
+	}
 
 	void clean();
 
@@ -57,6 +68,7 @@ private:
 	TiledMap* tiledMap;
 	SoundController* soundController;
 	SpikeTrap* spikeTrap;
+	Particles* particles;
 	
 
 
