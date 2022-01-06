@@ -42,19 +42,11 @@ If you want to play the game using x86
 
 ## Performace profiling 
 
-Below is a picture of the perfomace profilling off memnary used when playing the game
-
-![image](https://user-images.githubusercontent.com/71771303/144948153-1820a5e8-dad8-40ae-91cd-6bbdb995baa9.png)
-
-Below is a picture of the perfomace profilling off the cpu  when playing the game
-
-![image](https://user-images.githubusercontent.com/71771303/144951472-67934d24-3485-45fc-a4e8-4ff4ca84d96c.png)
-
-From the picture beloe you can see that the font renderer uses up the most cpu usage at the moment 
+Below is a picture showing the CPU usage of the game in it you are able to see that the font renderer uses 44%. So i changed the font that i use in my game and was able to change this to only use 30% which is shown below.
 
 ![image](https://user-images.githubusercontent.com/71771303/144953298-d31ae096-07ea-4888-af96-2772a258fd34.png)
 
-
+![image](https://user-images.githubusercontent.com/71771303/148455894-719aa5bb-acc7-40d5-a113-f4d39793054e.png)
 
 
 
