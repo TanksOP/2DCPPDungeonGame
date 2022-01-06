@@ -6,16 +6,17 @@ Simple 2d, dungen explorer game
 
 
 Features:
-* the abbility to carry 2 weapns and switch between them
-* can pick up new weopns throughout the game and swap them with current ones
-* a bodd level with a harder enemy to kill
-*  Maybe hidden rooms - walk through certain walls to find them
-* Maybe minimap to show what room you are in 
+The player can shoot/throw swords at enimes to kill them.
+The enemies use pathfinding to tack down down the player.
+Spikes that come out of ground dealing damage to both the player and the enemies
+Menu system incuding - Main menu, pause menu, gameover menu.
+Sound - Background track, shooting sound, and damage indicator.
 
 ## Dependencies
 * SDL library
 * SDL image libary
 * SDL ttf libary
+* SDL Mixer libary
 
 ## Target platforms
 Support Windows x86/x64, GNU/Linux, OSX.
@@ -25,9 +26,11 @@ Instructions to build on Windows platforms:
 2) Select Release configuration, and x64 Architecture;
 3) Compile and run the project.
 
-## TODO
-Add in sounds
-Add in a sytem to chnage th tile map during game play
+## into the future
+Add in multiple levels
+Add a new class to control the level changes
+Add more enemy types that attck in differnt ways
+
 
 
 
