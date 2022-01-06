@@ -6,16 +6,16 @@ Simple 2d, dungen explorer game
 
 
 ## Features:
-The player can shoot/throw swords at enimes to kill them.
-The enemies use pathfinding to tack down down the player.
-Spikes that come out of ground dealing damage to both the player and the enemies
-Menu system incuding - Main menu, pause menu, gameover menu.
-Sound - Background track, shooting sound, and damage indicator.
+* The player can shoot/throw swords at enimes to kill them.
+* The enemies use pathfinding to tack down down the player.
+* Spikes that come out of ground dealing damage to both the player and the enemies
+* Menu system incuding - Main menu, pause menu, gameover menu.
+* Sound - Background track, shooting sound, and damage indicator.
 
-## into the future
-Add in multiple levels
-Add a new class to control the level changes
-Add more enemy types that attck in differnt ways
+## Into the future
+* Add in multiple levels
+* Add a new class to control the level changes
+* Add more enemy types that attck in differnt ways
 
 ## Dependencies
 * SDL library
