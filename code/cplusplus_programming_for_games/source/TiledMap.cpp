@@ -13,7 +13,7 @@ int TiledMap::init()
 	SDL_Surface* image = IMG_Load(filename.c_str());
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-
+	// gets the tilmepas from a txt file
 	std::ifstream fileIn1("Assets/tileMaps/map2.txt"); 
 	if (fileIn1.is_open())
 	{
@@ -67,7 +67,7 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 	*/
 	
 	
-	
+	 // works out ollsion with the tile map for the player 
 	int X1 = (x) / (windowWidth/mapWidth);
 	int X2 = (x + 0.5 * _width) / (windowWidth / mapWidth);
 	int X3 = (x + _width)/ (windowWidth / mapWidth);
@@ -99,6 +99,7 @@ bool TiledMap::pathIsClear(float x, float y, float _width, float _height)
 
 void TiledMap::update(float& level)
 {
+	// chanegs the tile map and collition map to open up the doors on the level
 	if (level == 1.5f) {
 		tileMap[9][2] = 103;
 		tileMap[10][2] = 104;
@@ -110,6 +111,18 @@ void TiledMap::update(float& level)
 		collitionMap[9][3] = 0;
 		collitionMap[10][3] = 0;
 	}
+}
+
+void TiledMap::Reset() {
+	tileMap[9][2] = 100;
+	tileMap[10][2] = 101;
+	tileMap[9][3] = 107;
+	tileMap[10][3] = 108;
+
+	collitionMap[9][2] = 1;
+	collitionMap[10][2] =1;
+	collitionMap[9][3] = 1;
+	collitionMap[10][3] = 1;
 }
 
 

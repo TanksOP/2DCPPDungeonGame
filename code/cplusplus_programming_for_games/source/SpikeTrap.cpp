@@ -14,6 +14,7 @@ void SpikeTrap::init()
 
 void SpikeTrap::spikeAnimation()
 {
+	// animates the spike trap
 	for (auto& s : spikes) {
 
 		if (SDL_GetTicks() - s.lastTrap == 5000) {
@@ -23,9 +24,6 @@ void SpikeTrap::spikeAnimation()
 		else if (SDL_GetTicks() - s.lastTrap == 2000) {
 			s.tile = 81;
 		}
-		/*else if (SDL_GetTicks() - s.lastTrap > 2000) {
-			s.tile = 80;
-		}*/
 		else if (SDL_GetTicks() - s.lastTrap  == 100) {
 			s.tile = 79;
 		}
@@ -35,6 +33,7 @@ void SpikeTrap::spikeAnimation()
 
 void SpikeTrap::update()
 {
+	// works out wherether the spike trap should be annimated yet or not
 	for (auto& s : spikes) {
 		tiledMap->tileMap[s.x][s.y] = s.tile;
 
@@ -53,6 +52,7 @@ void SpikeTrap::update()
 
 bool SpikeTrap::ouchSpikes(float x, float y, float _width, float _height)
 {
+	// works out colition with the spike trap based off of an x, y , width and height input	
 	int xx = x / 1200 * 20;
 	int yy = y/900 * 20;
 
@@ -72,6 +72,7 @@ bool SpikeTrap::ouchSpikes(float x, float y, float _width, float _height)
 
 void SpikeTrap::createSpikes()
 {
+	// creates the spike traps bassed off of the tile map data
 	for (int i = 0; i < 20; ++i)
 	{
 		for (int j = 0; j < 20; ++j)

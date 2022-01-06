@@ -28,27 +28,27 @@ void EnemyContoller::init()
 
 void EnemyContoller::createEnemy()
 {
-	// code in here for future will be used to determin what enemy to create
-
-	// this is just a simple line of code for now that will be changed in the future to add more functionality 
 	
+	// creates a random number that will decide what corner to spawn the enimes in
 	int enemySpawnLocation = rand() % 4;
-	
-	// change this to a switcha and case
 
-	if (enemySpawnLocation == 0) {
+	switch (enemySpawnLocation)
+	{
+	case 0:
 		enemys.push_back(Enemy{ 1200 / 20 * 2, 900 / 20 * 4, true, 2, 2 });
-	}else if (enemySpawnLocation == 1) {
+		break;
+	case 1:
 		enemys.push_back(Enemy{ 1200 / 20 * 2, 900 / 20 * 18, true, 2, 2 });
-	}else if (enemySpawnLocation == 2) {
+		break;
+	case 2:
 		enemys.push_back(Enemy{ 1200 / 20 * 18, 900 / 20 * 4, true, 2, 2 });
-	}else if (enemySpawnLocation == 3) {
+		break;
+	case 3:
 		enemys.push_back(Enemy{ 1200 / 20 * 18, 900 / 20 * 18, true, 2, 2 });
+		break;
+	default:
+		break;
 	}
-
-	//enemys.push_back(Enemy{ 1200/20*2, float(rand() % 400 + 101), true, 3, 3 });
-	std::cout << "Spawned an enemy" << std::endl;
-
 }
 
 void EnemyContoller::update(float &level)
@@ -60,11 +60,13 @@ void EnemyContoller::update(float &level)
 		lastAnimation = SDL_GetTicks();
 	}
 
-	if (enemys.size()  < 5 && enemys.size() < enemiesLeft) 
+	// create anouther enemey when there is less then 10 and if it is still meant to spwn anouther enemy
+	if (enemys.size()  < 10 && enemys.size() < enemiesLeft) 
 	{
 		createEnemy();
 	}
 
+	// when th eplayer has killed all of the enemies change the level to 1.5 so that it is between levels.
 	if (enemiesLeft <= 0) {
 		level = 1.5f;
 	}
@@ -74,13 +76,14 @@ void EnemyContoller::update(float &level)
 	for (auto& e : enemys)
 	{
 
-		// movement =--------------------
+		// when the enemy hits a spike they loose health anf play blood splatter particle efect
 
 		if (spikeTrap->ouchSpikes(e.x , e.y , 16, 20)) {
 			e.health--;
 			particles->createBloodSplatter(e.x + 16, e.y + 20);
 		}
 
+		// the code below passes the destiationa and start position of the enemy for the a* pathfing algorithum to use to make a path
 		if (!e.EnemyMoving) {		
 			
 			e.enemy.x = e.x / 1200 * 20 ;
@@ -99,6 +102,7 @@ void EnemyContoller::update(float &level)
 			}
 		}
 
+		// this code allows for smooth movement between the points on the path created.
 		if (e.EnemyMoving)
 		{	
 
@@ -121,18 +125,11 @@ void EnemyContoller::update(float &level)
 			else {
 					e.EnemyMoving = false;
 					e.x = e.path[1].x * 1200 / 20;
-					e.y = e.path[1].y * 900 / 20;
-				
+					e.y = e.path[1].y * 900 / 20;				
 			}
 			
 		}
-
-
-
-		//------------------------------------------------
-		if (e.x > 1200) {
-			e.alive = false;
-		}
+		// if an enemies health reaches 0  the score will increase al well as settign its alive condition to flase to it will be deleted
 		if (e.health <= 0)
 		{
 			e.alive = false;
@@ -140,7 +137,7 @@ void EnemyContoller::update(float &level)
 			enemiesLeft--;
 		}
 
-		// detects collition between bullets and the enemies
+		// detects collition between bullets and the enemies using circle collition
 		for (auto& b : bulletManager->bullets) 
 		{
 			// circle collision
@@ -152,8 +149,6 @@ void EnemyContoller::update(float &level)
 				e.health -= 1;
 				particles->createBloodSplatter(e.x + 16, e.y + 20);
 			}
-
-
 		}
 
 		// detects collition with the player 
@@ -217,10 +212,7 @@ void EnemyContoller::render()
 		// 1.25 0.8
 		SDL_RenderCopy(renderer, enemyTexture, &sourceRect, &dest);
 
-		// enemy health bar displayed above their head
-		// uses the x and y position of the enemy for the startign position, 
-		// then uses the max health and health values to work out the length of 
-		// bar meaning that even if the max health is greater the bar does not get longer.
+		// displayes a healthbar above the enemies
 		SDL_Rect healthBar = { e.x, e.y - 3, 35/e.maxHealth * e.health , 3 };
 		SDL_RenderCopy(renderer, enemyHealthTexture, 0, &healthBar);
 	}

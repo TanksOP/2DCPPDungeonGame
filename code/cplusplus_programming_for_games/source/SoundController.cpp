@@ -18,7 +18,7 @@ SoundController::SoundController()
 	sound = Mix_LoadWAV("Assets/music/shoot.wav");
 	soundFiles.push_back(sound);
 	
-
+	// changes the volume of the channels
 	Mix_Volume(1, MIX_MAX_VOLUME / 10);
 	Mix_Volume(2, MIX_MAX_VOLUME / 10);
 	Mix_Volume(3, MIX_MAX_VOLUME / 50);
@@ -28,6 +28,7 @@ SoundController::SoundController()
 
 void SoundController::PlaySound(int sound)
 {
+	// playes the music, in diffent channels deping on waht sound effect is being played
 	switch (sound)
 	{
 	case 0:
@@ -40,14 +41,7 @@ void SoundController::PlaySound(int sound)
 		Mix_PlayChannel(3, soundFiles[sound], 0);
 	default:
 		break;
-	}
-	
-	/*if (sound == 0) {
-		Mix_PlayChannel(1, soundFiles[sound], -1);
-	}else {
-		Mix_PlayChannel(-1, soundFiles[sound], 0);
-	}*/
-	
+	}	
 }
 
 void SoundController::clean()

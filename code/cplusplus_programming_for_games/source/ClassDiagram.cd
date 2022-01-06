@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BulletManager">
+    <Position X="3.25" Y="1" Width="2" />
+    <NestedTypes>
+      <Struct Name="BulletManager::Bullet" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>source\BulletManager.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAAAIAAAIAABAAAIAAQAUAAAAACAAIBAAJAAgAUgAA=</HashCode>
+      <FileName>source\BulletManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyContoller">
+    <Position X="6.25" Y="1.25" Width="5.5" />
+    <NestedTypes>
+      <Struct Name="EnemyContoller::Enemy" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>source\EnemyContoller.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AgAICAAgAAYABAgAIEgIEAAAEAIAAAKBQABAAAAcgAI=</HashCode>
+      <FileName>source\EnemyContoller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -11,45 +11,44 @@ BulletManager::BulletManager(SDL_Renderer* _renderer, Player* _player, TiledMap*
 
 void BulletManager::init()
 {
-	SDL_Surface* surface = IMG_Load("Assets/images/enemy.png");
+	// loads the bullet texture
+	SDL_Surface* surface = IMG_Load("Assets/throwingSword.png");
 	this->bulletTexture = SDL_CreateTextureFromSurface(this->renderer, surface);
 	SDL_FreeSurface(surface);
 }
 
 void BulletManager::CreateBullets(bool MouseLeftButton)
 {
+	// when the left mouse button pressed down and the shootTimerMS () has passed create a new bullet addding it to the bullet vector
 	if (MouseLeftButton)
 	{
 		if (SDL_GetTicks() - lastShot > shootTimerMS) {
 			SDL_GetMouseState(&mouseX, &mouseY);
 			float testRotation = atan2f(mouseY - player->GetY(), mouseX - player->GetX());
 			std::cout << testRotation << std::endl;
+
 			bullets.push_back(Bullet{ player->GetX() , player->GetY(), testRotation + (0.5f * 3.14159265f) ,0.0f });
+
 			lastShot = SDL_GetTicks();
 			soundController->PlaySound(Sounds::SHOOT);
-			//std::cout << "here" << std::endl;
+			
 		}
 	}
 	
 }
 
-//SDL_Render
 void BulletManager::update()
 {
 	for (auto& b : bullets) {
-		
-		//if (tileMap->pathIsClear(b.x + sin(b.rotation) * bulletVelocity, b.y - cos(b.rotation) * bulletVelocity, 20, 20))
-		//{
-			b.x += sin(b.rotation) * bulletVelocity;
-			b.y -= cos(b.rotation) * bulletVelocity;
-			b.distance += bulletVelocity;
-		//}
-		//else {
-			//b.distance = 1001;
-		
-		//}
+
+		// moves the bullet using it's speed and starting rotation
+		b.x += sin(b.rotation) * bulletVelocity;
+		b.y -= cos(b.rotation) * bulletVelocity;
+		b.distance += bulletVelocity;
+	
 	}
 
+	//deletes the bullets from the bullet vector when they go off of the screen or it's distace is > 1000
 	auto remove = remove_if(bullets.begin(), bullets.end(),
 	[](const Bullet& b) {
 			return b.distance > 1000 ||
@@ -57,13 +56,13 @@ void BulletManager::update()
 		b.x < 60 ||
 		b.y > 900 - 45||
 		b.x > 1200 - 60; });
-
-	// if distace > 1000 remove the bullet
-	bullets.erase(remove, bullets.end()); // removes etra spce still in the vector
+	// removes extra space still in the vector
+	bullets.erase(remove, bullets.end());
 }
 
 void BulletManager::Reset()
 {
+	//empties the bullet vector to clear the screen of all bullets
 	bullets.clear();
 }
 

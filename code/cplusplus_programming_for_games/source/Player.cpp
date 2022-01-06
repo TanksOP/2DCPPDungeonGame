@@ -18,7 +18,7 @@ void Player::init()
 {
 	//importing the lives        might change later to just use the tile map to get these idk
 	// importing the tile map
-	SDL_Surface* image1 = IMG_Load("Assets/DungeonTileset/frames/ui_heart_full.png");
+	SDL_Surface* image1 = IMG_Load("Assets/DungeonTileset/ui_heart_full.png");
 	if (image1 == nullptr) {
 		std::cout << "Could not load image" << std::endl;
 		return;
@@ -26,15 +26,15 @@ void Player::init()
 	heartFullTexture = SDL_CreateTextureFromSurface(renderer, image1);
 	SDL_FreeSurface(image1);
 
-	SDL_Surface* image2 = IMG_Load("Assets/DungeonTileset/frames/ui_heart_half.png");
+	SDL_Surface* image2 = IMG_Load("Assets/DungeonTileset/ui_heart_half.png");
 	if (image2 == nullptr) {
 		std::cout << "Could not load image" << std::endl;
-		return;
+		return; 
 	}
 	heartHalfTexture = SDL_CreateTextureFromSurface(renderer, image2);
 	SDL_FreeSurface(image2);
 
-	SDL_Surface* image3 = IMG_Load("Assets/DungeonTileset/frames/ui_heart_empty.png");
+	SDL_Surface* image3 = IMG_Load("Assets/DungeonTileset/ui_heart_empty.png");
 	if (image3 == nullptr) {
 		std::cout << "Could not load image" << std::endl;
 		return;
@@ -55,6 +55,9 @@ void Player::init()
 
 void Player::processInput(bool* keyDown)
 {
+	// works out what keys is being pressed down if a key to move lfet right up or down id pressed then
+	// it works out if there is a tile that the player cant go through infornt of of it. 
+	// if there is not it will move the direction of the key press, and depending on the key press it may also filp the charcater to face the direction of movement
 	if (keyDown[SDL_SCANCODE_LEFT] || keyDown[SDL_SCANCODE_A]) {
 		if ((x - 0.2f) > 0
 			&& tileMap->pathIsClear(x -0.2f, y, playerWidth, playerHeight)
@@ -108,7 +111,7 @@ void Player::processInput(bool* keyDown)
 			}
 		}
 	}
-
+	// when no keys are pressed down then chaneg the animation bak tot eh idle animation
 	if (!keyDown[SDL_SCANCODE_LEFT] && !keyDown[SDL_SCANCODE_DOWN] && !keyDown[SDL_SCANCODE_RIGHT] && !keyDown[SDL_SCANCODE_UP] 
 		&& !keyDown[SDL_SCANCODE_A] && !keyDown[SDL_SCANCODE_S] && !keyDown[SDL_SCANCODE_D] && !keyDown[SDL_SCANCODE_W]
 		&& currentPlayerFrame >= 46 && currentPlayerFrame <= 49)
@@ -119,6 +122,7 @@ void Player::processInput(bool* keyDown)
 
 void Player::update()
 {
+	// when the player hits a spike play damage sound and decrease health
 	if (spikeTrap->ouchSpikes(x + 8, y + 11, 16, 20)) {
 		health--;
 		int oof = rand() % 2 + 1;
@@ -178,6 +182,7 @@ void Player::render()
 	SDL_Rect renderLife2 = { 175, 25, 45, 45 };
 	SDL_Rect renderLife3 = { 225, 25, 45, 45 };
 
+	// renders the health depending on how many lives the player has
 	switch (health)
 	{
 	case 0:

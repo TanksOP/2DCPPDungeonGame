@@ -54,14 +54,12 @@ int GameLoop::init()
 	}
 	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-	// sets the game to full screen
-	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-
 	// sets all values in keydown to false so no keys are being pressed
 	for (int i = 0; i < 256; i++) {
 		keyDown[i] = false;
 	}
 
+	// creates and calles the init on all of the classes in the game 
 	particle = new Particles(renderer);
 	particle->init();
 	soundController = new SoundController();
@@ -86,9 +84,7 @@ int GameLoop::init()
 	ec = new EnemyContoller(renderer, bm, player, tiledMap.get(), soundController, spikeTrap, particle);
 	ec->init();
 
-	menus = new Menus(fontRenderer.get(), renderer, player, ec, spikeTrap, particle, bm);
-
-
+	menus = new Menus(fontRenderer.get(), renderer, player, ec, spikeTrap, particle, bm, tiledMap.get());
 
 	return 0;
 }
@@ -184,19 +180,11 @@ void GameLoop::update()
 
 void GameLoop::render()
 {
-
-	if (mainMenu) {
+	// depeding on what screen is active change what the game renders
+	if (mainMenu || ggScreen || winScreen || pauseMenu) {
 		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
 	}
-	else if (ggScreen) {
-		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
-	}
-	else if (winScreen) {
-		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
-	}
-	else if (pauseMenu) {
-		menus->Render(mainMenu, ggScreen, pauseMenu, winScreen);
-	}
+	
 	else if (!mainMenu && !ggScreen && !winScreen) {
 		SDL_RenderClear(renderer);
 		tiledMap->render();
@@ -217,8 +205,6 @@ void GameLoop::render()
 
 	
 	SDL_RenderPresent(renderer);
-
-	//SDL_Delay(16);
 }
 
 void GameLoop::clean()

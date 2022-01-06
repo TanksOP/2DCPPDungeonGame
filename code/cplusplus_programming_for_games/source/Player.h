@@ -41,8 +41,8 @@ public:
 	}
 
 	void ResetPlayerPostition() {
-		x = 300;
-		y = 300;
+		x = 400;
+		y = 400;
 	}
 	
 	void clean();
@@ -51,7 +51,7 @@ public:
 
 private:
 	
-	float playerSpeed = 0.1;
+	float playerSpeed = 0.2;
 	float x = 300;
 	float y = 300;
 	int health = 6;

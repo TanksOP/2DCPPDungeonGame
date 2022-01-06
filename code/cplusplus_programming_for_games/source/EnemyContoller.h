@@ -27,7 +27,7 @@ public:
 		int maxHealth;
 		std::vector<Node> path;
 		bool EnemyMoving = false;
-		float speed = 1.f / 40.f;
+		float speed = 1.f / 28.f;
 		Node enemy;
 		Node dest;
 	};
@@ -46,9 +46,10 @@ public:
 
 	void render();
 
+	// gets callled from menu when th egame start to set the starting values
 	void Reset() {
 		score = 0;
-		enemiesLeft = 20;
+		enemiesLeft = 50;
 		for (auto& e : enemys)
 		{
 			e.alive = false;

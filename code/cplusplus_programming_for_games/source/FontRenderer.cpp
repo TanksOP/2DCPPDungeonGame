@@ -12,11 +12,6 @@ void FontRenderer::init()
 	{
 		std::cout << SDL_GetError() << std::endl;
 	}
-	font = TTF_OpenFont("assets/fonts/orangeJuice.ttf",80);
-	if (font == NULL)
-	{
-		std::cout << SDL_GetError() << std::endl;
-	}
 	font2 = TTF_OpenFont("assets/fonts/Kreon.ttf", 40);
 	if (font2 == NULL)
 	{
