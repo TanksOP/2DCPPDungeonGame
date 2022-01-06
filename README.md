@@ -48,7 +48,10 @@ Below is a picture showing the CPU usage of the game in it you are able to see t
 
 ![image](https://user-images.githubusercontent.com/71771303/148455894-719aa5bb-acc7-40d5-a113-f4d39793054e.png)
 
+Bellow are some more pictures of code profiling of cpu uasage and memory usage. From looking at them i can see that i do not have a memory leak as the memory used by the program is not increasing as it continues.
 
+![image](https://user-images.githubusercontent.com/71771303/148458600-4f2ea3fd-e18a-4f86-901d-3675a68a6ce6.png)
+![image](https://user-images.githubusercontent.com/71771303/148459367-977dc1f5-b483-407f-9e49-9b55090ae0cb.png)
 
 
 ## Refrences
