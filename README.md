@@ -1,6 +1,8 @@
 <!-- ABOUT THE PROJECT -->
 #  Awesome 2D Shooter Game
 
+## Play the Game
+Open either Buildx64 or Buildx86 and then click on the cplusplus_programming_for_games.exe 
 <!-- A screenshot of your game would be nice here... -->
 Simple 2d, dungen explorer game
 
@@ -22,14 +24,6 @@ Simple 2d, dungen explorer game
 * SDL image libary
 * SDL ttf libary
 * SDL Mixer libary
-
-## Play the Game
-Open either Buildx64 or Buildx86 and then click on the cplusplus_programming_for_games.exe 
-
-
-
-
-
 
 ## Performace profiling 
 
