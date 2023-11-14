@@ -23,17 +23,8 @@ Simple 2d, dungen explorer game
 * SDL ttf libary
 * SDL Mixer libary
 
-## Target platforms
-Support Windows x86/x64, GNU/Linux, OSX.
-
-To play the game on x64
-1) Go into the bin folder
-2) click on the .exe file
-
-If you want to play the game using x86
-1) Go into the code directory
-2) then go into th release folder 
-3) Click on the .exe file to play the game
+## Play the Game
+Open either Buildx64 or Buildx86 and then click on the cplusplus_programming_for_games.exe 
 
 
 
